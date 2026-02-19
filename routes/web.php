@@ -4,12 +4,22 @@ use App\Http\Controllers\Admin\CashierController as AdminCashierController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\SaleReportController as AdminSaleReportController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Cashier\DashboardController as CashierDashboardController;
 use App\Http\Controllers\Cashier\SaleController as CashierSaleController;
 use App\Http\Controllers\Landing\ProductController as LandingProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LandingProductController::class, 'index'])->name('landing');
+
+Route::middleware('guest')->group(function (): void {
+    Route::get('/login', [LoginController::class, 'create'])->name('login');
+    Route::post('/login', [LoginController::class, 'store'])->name('login.attempt');
+});
+
+Route::post('/logout', [LoginController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('logout');
 
 Route::middleware(['auth', 'role:admin'])
     ->prefix('admin')

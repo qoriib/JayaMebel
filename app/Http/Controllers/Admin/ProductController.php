@@ -10,6 +10,11 @@ use Illuminate\Http\RedirectResponse;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'role:admin']);
+    }
+
     public function index(): View
     {
         $products = Product::query()->orderBy('nama_produk')->paginate(12);

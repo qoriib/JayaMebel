@@ -24,7 +24,7 @@ class StoreSaleRequest extends FormRequest
         return [
             'tanggal_penjualan' => ['required', 'date'],
             'items' => ['required', 'array', 'min:1'],
-            'items.*.product_id' => ['required', 'exists:products,id'],
+            'items.*.product_id' => ['required', 'integer', 'distinct', 'exists:products,id'],
             'items.*.jumlah' => ['required', 'integer', 'min:1'],
         ];
     }

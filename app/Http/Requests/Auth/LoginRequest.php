@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateProductStockRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,15 +21,10 @@ class UpdateProductStockRequest extends FormRequest
      */
     public function rules(): array
     {
-        $stokRules = ['nullable', 'integer', 'min:0'];
-
-        if ($this->input('stok_status') === 'tersedia') {
-            $stokRules = ['required', 'integer', 'min:1'];
-        }
-
         return [
-            'stok_status' => ['required', Rule::in(['tersedia', 'tidak'])],
-            'stok' => $stokRules,
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string'],
+            'remember' => ['nullable', 'boolean'],
         ];
     }
 }

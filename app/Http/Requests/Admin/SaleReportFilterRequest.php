@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateProductStockRequest extends FormRequest
+class SaleReportFilterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,15 +22,17 @@ class UpdateProductStockRequest extends FormRequest
      */
     public function rules(): array
     {
-        $stokRules = ['nullable', 'integer', 'min:0'];
-
-        if ($this->input('stok_status') === 'tersedia') {
-            $stokRules = ['required', 'integer', 'min:1'];
-        }
-
         return [
-            'stok_status' => ['required', Rule::in(['tersedia', 'tidak'])],
-            'stok' => $stokRules,
+            'from' => [
+                'nullable',
+                'date',
+                Rule::when($this->filled('to'), 'before_or_equal:to'),
+            ],
+            'to' => [
+                'nullable',
+                'date',
+                Rule::when($this->filled('from'), 'after_or_equal:from'),
+            ],
         ];
     }
 }

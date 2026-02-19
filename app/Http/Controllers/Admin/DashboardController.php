@@ -10,6 +10,11 @@ use Illuminate\Contracts\View\View;
 
 class DashboardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'role:admin']);
+    }
+
     public function index(): View
     {
         $totalCashiers = User::query()->where('role', 'kasir')->count();

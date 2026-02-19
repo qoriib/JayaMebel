@@ -10,9 +10,13 @@
                 <h1 class="h4 mb-1">Hai, {{ $cashier->nama }}</h1>
                 <p class="text-muted mb-0">Pantau kinerja pribadi dan lanjutkan transaksi yang tertunda.</p>
             </div>
-            <div class="text-lg-end">
-                <p class="text-muted mb-1">Pendapatan kamu hari ini</p>
-                <p class="fs-3 fw-semibold text-warning">Rp {{ number_format($todayRevenue, 0, ',', '.') }}</p>
+                <div class="text-lg-end">
+                    <p class="text-muted mb-1">Pendapatan kamu hari ini</p>
+                    <p class="fs-3 fw-semibold text-warning">Rp {{ number_format($todayRevenue, 0, ',', '.') }}</p>
+                    <form action="{{ route('logout') }}" method="POST" class="mt-3 d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-danger">Keluar Akun</button>
+                    </form>
             </div>
         </div>
     </section>

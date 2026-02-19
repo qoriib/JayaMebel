@@ -3,41 +3,51 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\SaleReportFilterRequest;
 use App\Models\Sale;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
 class SaleReportController extends Controller
 {
-    public function index(Request $request): View
+    public function __construct()
     {
-        $query = $this->applyFilters($request);
+        $this->middleware(['auth', 'role:admin']);
+    }
+
+    public function index(SaleReportFilterRequest $request): View
+    {
+        $filters = $request->validated();
+        $query = $this->applyFilters($filters);
         $totalRevenue = (clone $query)->sum('total_harga');
         $sales = $query->paginate(15)->withQueryString();
 
         return view('admin.reports.sales', [
             'sales' => $sales,
             'totalRevenue' => $totalRevenue,
-            'filters' => $request->only(['from', 'to']),
+            'filters' => $filters,
         ]);
     }
 
-    public function print(Request $request): View
+    public function print(SaleReportFilterRequest $request): View
     {
-        $sales = $this->applyFilters($request)->get();
+        $filters = $request->validated();
+        $sales = $this->applyFilters($filters)->get();
 
         return view('admin.reports.sales-print', [
             'sales' => $sales,
-            'filters' => $request->only(['from', 'to']),
+            'filters' => $filters,
         ]);
     }
 
-    private function applyFilters(Request $request): Builder
+    /**
+     * @param  array<string, mixed>  $filters
+     */
+    private function applyFilters(array $filters): Builder
     {
-        $from = $request->input('from');
-        $to = $request->input('to');
+        $from = $filters['from'] ?? null;
+        $to = $filters['to'] ?? null;
 
         return Sale::query()
             ->with(['cashier', 'details.product'])

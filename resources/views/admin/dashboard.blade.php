@@ -18,6 +18,10 @@
             <div class="text-lg-end">
                 <div class="metric-label">Pendapatan Hari Ini</div>
                 <div class="metric-value text-warning">Rp {{ number_format($todayRevenue, 0, ',', '.') }}</div>
+                <form action="{{ route('logout') }}" method="POST" class="mt-3 d-inline">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-danger">Keluar Akun</button>
+                </form>
             </div>
         </div>
     </section>
