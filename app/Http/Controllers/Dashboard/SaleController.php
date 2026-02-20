@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Cashier;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Cashier\StoreSaleRequest;
@@ -15,11 +15,6 @@ use Illuminate\Validation\ValidationException;
 
 class SaleController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth', 'role:kasir']);
-    }
-
     public function index(Request $request): View
     {
         $sales = $request->user()
@@ -33,7 +28,7 @@ class SaleController extends Controller
             ->whereDate('tanggal_penjualan', today())
             ->sum('total_harga');
 
-        return view('cashier.sales.index', compact('sales', 'totalTransactions', 'todayRevenue'));
+        return view('dashboard.sales.index', compact('sales', 'totalTransactions', 'todayRevenue'));
     }
 
     public function create(): View
@@ -43,7 +38,7 @@ class SaleController extends Controller
             ->orderBy('nama_produk')
             ->get();
 
-        return view('cashier.sales.create', compact('products'));
+        return view('dashboard.sales.create', compact('products'));
     }
 
     public function store(StoreSaleRequest $request): RedirectResponse

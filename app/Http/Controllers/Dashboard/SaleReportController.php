@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\SaleReportFilterRequest;
@@ -12,11 +12,6 @@ use Illuminate\Support\Carbon;
 
 class SaleReportController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth', 'role:admin']);
-    }
-
     public function index(SaleReportFilterRequest $request): View
     {
         $filters = $request->validated();
@@ -29,7 +24,7 @@ class SaleReportController extends Controller
 
         $sales = $query->paginate(20)->withQueryString();
 
-        return view('admin.reports.sales', [
+        return view('dashboard.reports.sales', [
             'sales' => $sales,
             'cashiers' => $cashiers,
             'totalRevenue' => $totalRevenue,
@@ -48,7 +43,7 @@ class SaleReportController extends Controller
         $totalTransactions = (clone $query)->count();
         $sales = $query->get();
 
-        return view('admin.reports.sales-print', [
+        return view('dashboard.reports.sales-print', [
             'sales' => $sales,
             'filters' => $filters,
             'totalRevenue' => $totalRevenue,

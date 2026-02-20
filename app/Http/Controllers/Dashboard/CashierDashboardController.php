@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Cashier;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class CashierDashboardController extends Controller
 {
     public function __construct()
     {
@@ -27,7 +27,7 @@ class DashboardController extends Controller
             ->limit(5)
             ->get();
 
-        return view('cashier.dashboard', [
+        return view('dashboard.cashier', [
             'cashier' => $cashier,
             'totalSales' => $totalSales,
             'todayRevenue' => $todayRevenue,

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreCashierRequest;
@@ -12,11 +12,6 @@ use Illuminate\Support\Facades\Hash;
 
 class CashierController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth', 'role:admin']);
-    }
-
     public function index(): View
     {
         $cashiers = User::query()
@@ -24,12 +19,12 @@ class CashierController extends Controller
             ->latest()
             ->paginate(10);
 
-        return view('admin.cashiers.index', compact('cashiers'));
+        return view('dashboard.cashiers.index', compact('cashiers'));
     }
 
     public function create(): View
     {
-        return view('admin.cashiers.create');
+        return view('dashboard.cashiers.create');
     }
 
     public function store(StoreCashierRequest $request): RedirectResponse
@@ -50,7 +45,7 @@ class CashierController extends Controller
     {
         $this->abortIfNotCashier($cashier);
 
-        return view('admin.cashiers.edit', compact('cashier'));
+        return view('dashboard.cashiers.edit', compact('cashier'));
     }
 
     public function update(UpdateCashierRequest $request, User $cashier): RedirectResponse

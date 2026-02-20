@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreProductRequest;
@@ -12,21 +12,16 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth', 'role:admin']);
-    }
-
     public function index(): View
     {
         $products = Product::query()->orderBy('nama_produk')->paginate(12);
 
-        return view('admin.products.index', compact('products'));
+        return view('dashboard.products.index', compact('products'));
     }
 
     public function create(): View
     {
-        return view('admin.products.create');
+        return view('dashboard.products.create');
     }
 
     public function store(StoreProductRequest $request): RedirectResponse
@@ -52,7 +47,7 @@ class ProductController extends Controller
 
     public function edit(Product $product): View
     {
-        return view('admin.products.edit', compact('product'));
+        return view('dashboard.products.edit', compact('product'));
     }
 
     public function update(UpdateProductRequest $request, Product $product): RedirectResponse

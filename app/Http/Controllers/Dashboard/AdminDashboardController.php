@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
@@ -8,7 +8,7 @@ use App\Models\Sale;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 
-class DashboardController extends Controller
+class AdminDashboardController extends Controller
 {
     public function __construct()
     {
@@ -30,7 +30,7 @@ class DashboardController extends Controller
             ->limit(5)
             ->get();
 
-        return view('admin.dashboard', [
+        return view('dashboard.admin', [
             'totalCashiers' => $totalCashiers,
             'totalProducts' => $totalProducts,
             'availableProducts' => $availableProducts,
