@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cashier;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Cashier\StoreSaleRequest;
 use App\Models\Product;
+use App\Models\Sale;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -27,12 +28,22 @@ class SaleController extends Controller
             ->latest('tanggal_penjualan')
             ->paginate(15);
 
+        $totalTransactions = $request->user()->sales()->count();
+        $todayRevenue = $request->user()->sales()
+            ->whereDate('tanggal_penjualan', today())
+            ->sum('total_harga');
+
+        return view('cashier.sales.index', compact('sales', 'totalTransactions', 'todayRevenue'));
+    }
+
+    public function create(): View
+    {
         $products = Product::query()
             ->where('stok_status', 'tersedia')
             ->orderBy('nama_produk')
             ->get();
 
-        return view('cashier.sales.index', compact('sales', 'products'));
+        return view('cashier.sales.create', compact('products'));
     }
 
     public function store(StoreSaleRequest $request): RedirectResponse
@@ -86,5 +97,29 @@ class SaleController extends Controller
         return redirect()
             ->route('cashier.sales.index')
             ->with('success', 'Transaksi penjualan berhasil dicatat.');
+    }
+
+    public function destroy(Request $request, Sale $sale): RedirectResponse
+    {
+        if ($sale->user_id !== $request->user()->id) {
+            abort(403);
+        }
+
+        DB::transaction(function () use ($sale): void {
+            foreach ($sale->details as $detail) {
+                if ($detail->product) {
+                    $restoredStock = $detail->product->stok + $detail->jumlah;
+                    $detail->product->update([
+                        'stok' => $restoredStock,
+                        'stok_status' => 'tersedia',
+                    ]);
+                }
+            }
+            $sale->delete();
+        });
+
+        return redirect()
+            ->route('cashier.sales.index')
+            ->with('success', 'Transaksi berhasil dihapus dan stok dipulihkan.');
     }
 }

@@ -1,74 +1,105 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
-@section('title', 'Manajemen Stok Produk | UD Jaya Mebel')
+@section('title', 'Data Produk | UD Jaya Mebel')
+@section('page-title', 'Data Produk')
 
 @section('content')
-    <section class="glass-panel p-4 p-lg-5 mb-4">
-        <div class="d-flex flex-column flex-lg-row justify-content-between gap-3">
-            <div>
-                <p class="accent-chip mb-2"><span aria-hidden="true">📦</span> Pengendalian Stok</p>
-                <h1 class="h4 mb-0">Kelola Ketersediaan Produk</h1>
-            </div>
-            <span class="text-muted">Total produk: {{ $products->total() }}</span>
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible mb-4" role="alert"
+             style="border-radius:10px;border:none;background:#d1fae5;color:#065f46">
+            <i class="bi bi-check-circle me-2"></i>{{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
-    </section>
+    @endif
 
-    <section class="glass-panel p-3">
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <div>
+            <h1 class="h5 fw-bold mb-1">Daftar Produk</h1>
+            <p class="text-muted mb-0" style="font-size:.85rem">{{ $products->total() }} produk terdaftar</p>
+        </div>
+        <a href="{{ route('admin.products.create') }}" class="btn-accent d-flex align-items-center gap-2 text-decoration-none">
+            <i class="bi bi-plus-lg"></i> Tambah Produk
+        </a>
+    </div>
+
+    <div class="section-card">
         <div class="table-responsive">
-            <table class="table table-dark table-dark-custom align-middle mb-0">
+            <table class="table table-custom table-hover align-middle mb-0">
                 <thead>
                     <tr>
+                        <th style="width:40px">#</th>
                         <th>Produk</th>
-                        <th>Status</th>
-                        <th>Stok</th>
                         <th>Harga</th>
+                        <th>Stok</th>
+                        <th>Status</th>
                         <th class="text-end">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($products as $product)
+                    @forelse ($products as $index => $product)
                         <tr>
+                            <td class="text-muted" style="font-size:.8rem">{{ $products->firstItem() + $index }}</td>
                             <td>
                                 <div class="d-flex align-items-center gap-3">
-                                    <div class="rounded-circle bg-dark bg-opacity-50 d-flex align-items-center justify-content-center" style="width:48px;height:48px;">
-                                        {{ strtoupper(substr($product->nama_produk, 0, 1)) }}
-                                    </div>
+                                    @if ($product->gambar)
+                                        <img src="{{ Storage::url($product->gambar) }}" alt="{{ $product->nama_produk }}"
+                                             style="width:44px;height:44px;object-fit:cover;border-radius:8px;flex-shrink:0">
+                                    @else
+                                        <div style="width:44px;height:44px;border-radius:8px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:.9rem;flex-shrink:0">
+                                            {{ strtoupper(substr($product->nama_produk, 0, 1)) }}
+                                        </div>
+                                    @endif
                                     <div>
-                                        <div class="fw-semibold">{{ $product->nama_produk }}</div>
-                                        <small class="text-muted">{{ \Illuminate\Support\Str::limit($product->deskripsi, 60) }}</small>
+                                        <div class="fw-semibold" style="font-size:.9rem">{{ $product->nama_produk }}</div>
+                                        @if ($product->deskripsi)
+                                            <small class="text-muted">{{ Str::limit($product->deskripsi, 55) }}</small>
+                                        @endif
                                     </div>
                                 </div>
                             </td>
+                            <td class="money">Rp {{ number_format($product->harga, 0, ',', '.') }}</td>
+                            <td>{{ $product->stok }} <span class="text-muted" style="font-size:.8rem">unit</span></td>
                             <td>
-                                <span class="badge {{ $product->stok_status === 'tersedia' ? 'bg-success' : 'bg-danger' }}">
-                                    {{ ucfirst($product->stok_status) }}
-                                </span>
+                                @if ($product->stok_status === 'tersedia')
+                                    <span class="badge-success">Tersedia</span>
+                                @else
+                                    <span class="badge-danger">Tidak Tersedia</span>
+                                @endif
                             </td>
-                            <td>{{ $product->stok }} unit</td>
-                            <td>Rp {{ number_format($product->harga, 0, ',', '.') }}</td>
                             <td class="text-end">
-                                <form action="{{ route('admin.products.update-status', $product) }}" method="POST" class="d-inline-flex gap-2 align-items-center justify-content-end">
-                                    @csrf
-                                    @method('PATCH')
-                                    <select name="stok_status" class="form-select form-select-sm w-auto">
-                                        <option value="tersedia" @selected($product->stok_status === 'tersedia')>Tersedia</option>
-                                        <option value="tidak" @selected($product->stok_status === 'tidak')>Tidak Tersedia</option>
-                                    </select>
-                                    <input type="number" name="stok" value="{{ $product->stok }}" min="0" class="form-control form-control-sm w-25" placeholder="Stok">
-                                    <button type="submit" class="btn btn-sm btn-outline-light">Perbarui</button>
-                                </form>
+                                <div class="d-flex align-items-center justify-content-end gap-2">
+                                    <a href="{{ route('admin.products.edit', $product) }}"
+                                       class="btn-outline-custom d-inline-flex align-items-center gap-1"
+                                       style="font-size:.8rem;padding:.3rem .75rem">
+                                        <i class="bi bi-pencil"></i> Edit
+                                    </a>
+                                    <form action="{{ route('admin.products.destroy', $product) }}" method="POST"
+                                          onsubmit="return confirm('Hapus produk {{ $product->nama_produk }}?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" style="border-radius:8px;font-size:.8rem">
+                                            <i class="bi bi-trash"></i> Hapus
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="text-center text-muted">Belum ada produk.</td>
+                            <td colspan="6" class="text-center py-5">
+                                <i class="bi bi-box-seam d-block mb-2" style="font-size:2rem;color:var(--text-muted)"></i>
+                                <span class="text-muted">Belum ada produk.</span>
+                                <div class="mt-3">
+                                    <a href="{{ route('admin.products.create') }}" class="btn-accent text-decoration-none">Tambah Produk Pertama</a>
+                                </div>
+                            </td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
-        <div class="mt-3">
-            {{ $products->links() }}
-        </div>
-    </section>
+        @if ($products->hasPages())
+            <div class="mt-3 px-2">{{ $products->links() }}</div>
+        @endif
+    </div>
 @endsection

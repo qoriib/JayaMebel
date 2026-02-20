@@ -1,101 +1,79 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
-@section('title', 'Manajemen Kasir | UD Jaya Mebel')
+@section('title', 'Data Kasir | UD Jaya Mebel')
+@section('page-title', 'Data Kasir')
 
 @section('content')
-    <div class="row g-4">
-        <div class="col-12 col-lg-4">
-            <section class="glass-panel p-4 h-100">
-                <h1 class="h4 fw-semibold mb-3">Tambah Kasir Baru</h1>
-                <form action="{{ route('admin.cashiers.store') }}" method="POST" class="vstack gap-3">
-                    @csrf
-                    <div>
-                        <label for="nama" class="form-label">Nama Lengkap</label>
-                        <input type="text" id="nama" name="nama" class="form-control" placeholder="Contoh: Dinda Rahma" required>
-                    </div>
-                    <div>
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" id="email" name="email" class="form-control" placeholder="kasir@jayamebel.id" required>
-                    </div>
-                    <div>
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" id="password" name="password" class="form-control" minlength="8" required>
-                        <small class="text-muted">Minimal 8 karakter dan kombinasi angka.</small>
-                    </div>
-                    <div>
-                        <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
-                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" minlength="8" required>
-                    </div>
-                    <button type="submit" class="btn btn-warning text-dark fw-semibold">Simpan Kasir</button>
-                </form>
-            </section>
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <div>
+            <h1 class="h5 fw-bold mb-1">Daftar Kasir</h1>
+            <p class="text-muted mb-0" style="font-size:.85rem">{{ $cashiers->total() }} akun kasir terdaftar</p>
         </div>
-        <div class="col-12 col-lg-8">
-            <section class="glass-panel p-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div>
-                        <p class="accent-chip mb-2"><span aria-hidden="true">👥</span> Akun Kasir Aktif</p>
-                        <h2 class="h4 mb-0">Daftar Kasir</h2>
-                    </div>
-                    <span class="text-muted">Total: {{ $cashiers->total() }}</span>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-dark table-dark-custom align-middle">
-                        <thead>
-                            <tr>
-                                <th>Nama</th>
-                                <th>Email</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($cashiers as $cashier)
-                                <tr>
-                                    <td colspan="3">
-                                        <form action="{{ route('admin.cashiers.update', $cashier) }}" method="POST" class="row g-3 align-items-end">
-                                            @csrf
-                                            @method('PUT')
-                                            <div class="col-md-4">
-                                                <label class="form-label" for="nama-{{ $cashier->id }}">Nama</label>
-                                                <input id="nama-{{ $cashier->id }}" type="text" name="nama" value="{{ $cashier->nama }}" class="form-control" required>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label class="form-label" for="email-{{ $cashier->id }}">Email</label>
-                                                <input id="email-{{ $cashier->id }}" type="email" name="email" value="{{ $cashier->email }}" class="form-control" required>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label class="form-label" for="password-{{ $cashier->id }}">Password Baru</label>
-                                                <input id="password-{{ $cashier->id }}" type="password" name="password" class="form-control" placeholder="Opsional" minlength="8">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label class="form-label" for="password-confirm-{{ $cashier->id }}">Konfirmasi</label>
-                                                <input id="password-confirm-{{ $cashier->id }}" type="password" name="password_confirmation" class="form-control" placeholder="Opsional" minlength="8">
-                                            </div>
-                                            <div class="col-md-2 d-flex gap-2">
-                                                <button type="submit" class="btn btn-sm btn-outline-light flex-fill">Simpan</button>
-                                            </div>
-                                        </form>
-                                        <div class="mt-2 d-flex justify-content-end">
-                                            <form action="{{ route('admin.cashiers.destroy', $cashier) }}" method="POST" onsubmit="return confirm('Hapus kasir ini?')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-outline-danger">Hapus</button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="3" class="text-center text-muted">Belum ada akun kasir.</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-                <div class="mt-3">
-                    {{ $cashiers->links() }}
-                </div>
-            </section>
+        <a href="{{ route('admin.cashiers.create') }}" class="btn-accent d-flex align-items-center gap-2 text-decoration-none">
+            <i class="bi bi-plus-lg"></i> Tambah Kasir
+        </a>
+    </div>
+
+    <div class="section-card">
+        <div class="table-responsive">
+            <table class="table table-custom table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th style="width:40px">#</th>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>Bergabung</th>
+                        <th class="text-end">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($cashiers as $index => $cashier)
+                        <tr>
+                            <td class="text-muted" style="font-size:.8rem">{{ $cashiers->firstItem() + $index }}</td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <div style="width:36px;height:36px;border-radius:50%;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:.8rem;flex-shrink:0">
+                                        {{ strtoupper(substr($cashier->nama, 0, 1)) }}
+                                    </div>
+                                    <span>{{ $cashier->nama }}</span>
+                                </div>
+                            </td>
+                            <td class="text-muted" style="font-size:.875rem">{{ $cashier->email }}</td>
+                            <td class="text-muted" style="font-size:.8rem">{{ $cashier->created_at->format('d M Y') }}</td>
+                            <td class="text-end">
+                                <div class="d-flex align-items-center justify-content-end gap-2">
+                                    <a href="{{ route('admin.cashiers.edit', $cashier) }}"
+                                       class="btn-outline-custom d-inline-flex align-items-center gap-1"
+                                       style="font-size:.8rem;padding:.3rem .75rem">
+                                        <i class="bi bi-pencil"></i> Edit
+                                    </a>
+                                    <form action="{{ route('admin.cashiers.destroy', $cashier) }}" method="POST"
+                                          onsubmit="return confirm('Hapus kasir {{ $cashier->nama }}?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" style="border-radius:8px;font-size:.8rem">
+                                            <i class="bi bi-trash"></i> Hapus
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center py-5">
+                                <i class="bi bi-people d-block mb-2" style="font-size:2rem;color:var(--text-muted)"></i>
+                                <span class="text-muted">Belum ada akun kasir.</span>
+                                <div class="mt-3">
+                                    <a href="{{ route('admin.cashiers.create') }}" class="btn-accent text-decoration-none">Tambah Kasir Pertama</a>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
+        @if ($cashiers->hasPages())
+            <div class="mt-3 px-2">{{ $cashiers->links() }}</div>
+        @endif
     </div>
 @endsection

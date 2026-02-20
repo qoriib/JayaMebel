@@ -7,17 +7,12 @@ use Illuminate\Validation\Rule;
 
 class SaleReportFilterRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
@@ -33,6 +28,7 @@ class SaleReportFilterRequest extends FormRequest
                 'date',
                 Rule::when($this->filled('from'), 'after_or_equal:from'),
             ],
+            'cashier_id' => ['nullable', 'integer', 'exists:users,id'],
         ];
     }
 }

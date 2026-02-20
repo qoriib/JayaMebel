@@ -28,12 +28,18 @@ Route::middleware(['auth', 'role:admin'])
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
         Route::get('/cashiers', [AdminCashierController::class, 'index'])->name('cashiers.index');
+        Route::get('/cashiers/create', [AdminCashierController::class, 'create'])->name('cashiers.create');
         Route::post('/cashiers', [AdminCashierController::class, 'store'])->name('cashiers.store');
+        Route::get('/cashiers/{cashier}/edit', [AdminCashierController::class, 'edit'])->name('cashiers.edit');
         Route::put('/cashiers/{cashier}', [AdminCashierController::class, 'update'])->name('cashiers.update');
         Route::delete('/cashiers/{cashier}', [AdminCashierController::class, 'destroy'])->name('cashiers.destroy');
 
         Route::get('/products', [AdminProductController::class, 'index'])->name('products.index');
-        Route::patch('/products/{product}/status', [AdminProductController::class, 'updateStatus'])->name('products.update-status');
+        Route::get('/products/create', [AdminProductController::class, 'create'])->name('products.create');
+        Route::post('/products', [AdminProductController::class, 'store'])->name('products.store');
+        Route::get('/products/{product}/edit', [AdminProductController::class, 'edit'])->name('products.edit');
+        Route::put('/products/{product}', [AdminProductController::class, 'update'])->name('products.update');
+        Route::delete('/products/{product}', [AdminProductController::class, 'destroy'])->name('products.destroy');
 
         Route::get('/reports/sales', [AdminSaleReportController::class, 'index'])->name('reports.sales');
         Route::get('/reports/sales/print', [AdminSaleReportController::class, 'print'])->name('reports.sales.print');
@@ -45,5 +51,7 @@ Route::middleware(['auth', 'role:kasir'])
     ->group(function (): void {
         Route::get('/dashboard', [CashierDashboardController::class, 'index'])->name('dashboard');
         Route::get('/sales', [CashierSaleController::class, 'index'])->name('sales.index');
+        Route::get('/sales/create', [CashierSaleController::class, 'create'])->name('sales.create');
         Route::post('/sales', [CashierSaleController::class, 'store'])->name('sales.store');
+        Route::delete('/sales/{sale}', [CashierSaleController::class, 'destroy'])->name('sales.destroy');
     });

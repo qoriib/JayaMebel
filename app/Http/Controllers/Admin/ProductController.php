@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\UpdateProductStockRequest;
+use App\Http\Requests\Admin\StoreProductRequest;
+use App\Http\Requests\Admin\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -22,15 +24,68 @@ class ProductController extends Controller
         return view('admin.products.index', compact('products'));
     }
 
-    public function updateStatus(UpdateProductStockRequest $request, Product $product): RedirectResponse
+    public function create(): View
+    {
+        return view('admin.products.create');
+    }
+
+    public function store(StoreProductRequest $request): RedirectResponse
     {
         $data = $request->validated();
+        $gambarPath = null;
 
-        $product->update([
+        if ($request->hasFile('gambar')) {
+            $gambarPath = $request->file('gambar')->store('products', 'public');
+        }
+
+        Product::query()->create([
+            'nama_produk' => $data['nama_produk'],
+            'deskripsi' => $data['deskripsi'] ?? null,
+            'gambar' => $gambarPath,
+            'harga' => $data['harga'],
+            'stok' => $data['stok'],
             'stok_status' => $data['stok_status'],
-            'stok' => $data['stok'] ?? $product->stok,
         ]);
 
-        return back()->with('success', 'Status stok produk diperbarui.');
+        return redirect()->route('admin.products.index')->with('success', 'Produk baru berhasil ditambahkan.');
+    }
+
+    public function edit(Product $product): View
+    {
+        return view('admin.products.edit', compact('product'));
+    }
+
+    public function update(UpdateProductRequest $request, Product $product): RedirectResponse
+    {
+        $data = $request->validated();
+        $payload = [
+            'nama_produk' => $data['nama_produk'],
+            'deskripsi' => $data['deskripsi'] ?? null,
+            'harga' => $data['harga'],
+            'stok' => $data['stok'],
+            'stok_status' => $data['stok_status'],
+        ];
+
+        if ($request->hasFile('gambar')) {
+            if ($product->gambar) {
+                Storage::disk('public')->delete($product->gambar);
+            }
+            $payload['gambar'] = $request->file('gambar')->store('products', 'public');
+        }
+
+        $product->update($payload);
+
+        return redirect()->route('admin.products.index')->with('success', 'Data produk berhasil diperbarui.');
+    }
+
+    public function destroy(Product $product): RedirectResponse
+    {
+        if ($product->gambar) {
+            Storage::disk('public')->delete($product->gambar);
+        }
+
+        $product->delete();
+
+        return redirect()->route('admin.products.index')->with('success', 'Produk berhasil dihapus.');
     }
 }
