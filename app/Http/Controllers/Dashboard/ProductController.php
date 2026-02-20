@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreProductRequest;
-use App\Http\Requests\Admin\UpdateProductRequest;
+use App\Http\Requests\Dashboard\StoreProductRequest;
+use App\Http\Requests\Dashboard\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -14,9 +14,11 @@ class ProductController extends Controller
 {
     public function index(): View
     {
-        $products = Product::query()->orderBy('nama_produk')->paginate(12);
+        $products = Product::query()
+            ->orderBy('nama_produk')
+            ->paginate(12);
 
-        return view('dashboard.products.index', compact('products'));
+        return view('dashboard.products.index', compact('products',));
     }
 
     public function create(): View

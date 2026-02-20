@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\SaleReportFilterRequest;
+use App\Http\Requests\Dashboard\SaleReportFilterRequest;
 use App\Models\Sale;
 use App\Models\User;
 use Illuminate\Contracts\View\View;

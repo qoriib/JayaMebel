@@ -4,17 +4,16 @@
 @section('page-title', 'Data Kasir')
 
 @section('content')
-    <div class="d-flex align-items-center justify-content-between mb-4">
-        <div>
-            <h1 class="h5 fw-bold mb-1">Daftar Kasir</h1>
-            <p class="text-muted mb-0" style="font-size:.85rem">{{ $cashiers->total() }} akun kasir terdaftar</p>
+    <div class="glass-panel p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <div>
+                <h2 class="h5 fw-bold mb-0">Daftar Kasir</h2>
+                <p class="text-muted mb-0" style="font-size:.8rem">{{ $cashiers->total() }} akun kasir terdaftar</p>
+            </div>
+            <a href="{{ route('admin.cashiers.create') }}" class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i> Tambah Kasir
+            </a>
         </div>
-        <a href="{{ route('admin.cashiers.create') }}" class="btn-accent d-flex align-items-center gap-2 text-decoration-none">
-            <i class="bi bi-plus-lg"></i> Tambah Kasir
-        </a>
-    </div>
-
-    <div class="section-card">
         <div class="table-responsive">
             <table class="table table-custom table-hover align-middle mb-0">
                 <thead>
@@ -29,29 +28,19 @@
                 <tbody>
                     @forelse ($cashiers as $index => $cashier)
                         <tr>
-                            <td class="text-muted" style="font-size:.8rem">{{ $cashiers->firstItem() + $index }}</td>
-                            <td>
-                                <div class="d-flex align-items-center gap-2">
-                                    <div style="width:36px;height:36px;border-radius:50%;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:.8rem;flex-shrink:0">
-                                        {{ strtoupper(substr($cashier->nama, 0, 1)) }}
-                                    </div>
-                                    <span>{{ $cashier->nama }}</span>
-                                </div>
-                            </td>
-                            <td class="text-muted" style="font-size:.875rem">{{ $cashier->email }}</td>
-                            <td class="text-muted" style="font-size:.8rem">{{ $cashier->created_at->format('d M Y') }}</td>
+                            <td class="text-muted">{{ $cashiers->firstItem() + $index }}</td>
+                            <td>{{ $cashier->nama }}</td>
+                            <td>{{ $cashier->email }}</td>
+                            <td class="text-muted">{{ $cashier->created_at->format('d M Y') }}</td>
                             <td class="text-end">
                                 <div class="d-flex align-items-center justify-content-end gap-2">
-                                    <a href="{{ route('admin.cashiers.edit', $cashier) }}"
-                                       class="btn-outline-custom d-inline-flex align-items-center gap-1"
-                                       style="font-size:.8rem;padding:.3rem .75rem">
+                                    <a href="{{ route('admin.cashiers.edit', $cashier) }}" class="btn btn-sm btn-outline-primary">
                                         <i class="bi bi-pencil"></i> Edit
                                     </a>
-                                    <form action="{{ route('admin.cashiers.destroy', $cashier) }}" method="POST"
-                                          onsubmit="return confirm('Hapus kasir {{ $cashier->nama }}?')">
+                                    <form action="{{ route('admin.cashiers.destroy', $cashier) }}" method="POST" onsubmit="return confirm('Hapus kasir {{ $cashier->nama }}?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-outline-danger" style="border-radius:8px;font-size:.8rem">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">
                                             <i class="bi bi-trash"></i> Hapus
                                         </button>
                                     </form>

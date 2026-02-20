@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreCashierRequest;
-use App\Http\Requests\Admin\UpdateCashierRequest;
+use App\Http\Requests\Dashboard\StoreCashierRequest;
+use App\Http\Requests\Dashboard\UpdateCashierRequest;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;

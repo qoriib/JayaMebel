@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Cashier\StoreSaleRequest;
+use App\Http\Requests\Dashboard\StoreSaleRequest;
 use App\Models\Product;
 use App\Models\Sale;
 use Illuminate\Contracts\View\View;

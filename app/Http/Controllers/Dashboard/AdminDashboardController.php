@@ -10,20 +10,12 @@ use Illuminate\Contracts\View\View;
 
 class AdminDashboardController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth', 'role:admin']);
-    }
-
     public function index(): View
     {
         $totalCashiers = User::query()->where('role', 'kasir')->count();
         $totalProducts = Product::query()->count();
         $availableProducts = Product::query()->where('stok_status', 'tersedia')->count();
         $totalSales = Sale::query()->count();
-        $todayRevenue = Sale::query()
-            ->whereDate('tanggal_penjualan', now()->toDateString())
-            ->sum('total_harga');
         $recentSales = Sale::query()
             ->with('cashier')
             ->latest('tanggal_penjualan')
@@ -35,7 +27,6 @@ class AdminDashboardController extends Controller
             'totalProducts' => $totalProducts,
             'availableProducts' => $availableProducts,
             'totalSales' => $totalSales,
-            'todayRevenue' => $todayRevenue,
             'recentSales' => $recentSales,
         ]);
     }

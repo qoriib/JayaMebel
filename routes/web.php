@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\CashierDashboardController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\SaleController;
 use App\Http\Controllers\Dashboard\SaleReportController;
+use App\Http\Controllers\Dashboard\StockReportController;
 use App\Http\Controllers\Landing\ProductController as LandingProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,9 @@ Route::middleware(['auth', 'role:admin'])
 
         Route::get('/reports/sales', [SaleReportController::class, 'index'])->name('reports.sales');
         Route::get('/reports/sales/print', [SaleReportController::class, 'print'])->name('reports.sales.print');
+
+        Route::get('/reports/stock', [StockReportController::class, 'index'])->name('reports.stock');
+        Route::get('/reports/stock/print', [StockReportController::class, 'print'])->name('reports.stock.print');
     });
 
 Route::middleware(['auth', 'role:kasir'])

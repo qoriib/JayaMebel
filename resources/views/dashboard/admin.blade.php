@@ -4,39 +4,10 @@
 @section('page-title', 'Dashboard')
 
 @section('sidebar-links')
-    <div class="sidebar-section-label">Utama</div>
-    <a href="{{ route('admin.dashboard') }}" class="sidebar-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-        <i class="bi bi-speedometer2"></i> Dashboard
-    </a>
-
-    <div class="sidebar-section-label">Manajemen</div>
-    <a href="{{ route('admin.cashiers.index') }}" class="sidebar-link {{ request()->routeIs('admin.cashiers.*') ? 'active' : '' }}">
-        <i class="bi bi-people"></i> Data Kasir
-    </a>
-    <a href="{{ route('admin.products.index') }}" class="sidebar-link {{ request()->routeIs('admin.products.*') ? 'active' : '' }}">
-        <i class="bi bi-box-seam"></i> Produk
-    </a>
-
-    <div class="sidebar-section-label">Laporan</div>
-    <a href="{{ route('admin.reports.sales') }}" class="sidebar-link {{ request()->routeIs('admin.reports.*') ? 'active' : '' }}">
-        <i class="bi bi-bar-chart-line"></i> Laporan Penjualan
-    </a>
+    
 @endsection
 
 @section('content')
-    {{-- Welcome Banner --}}
-    <div class="glass-panel p-4 mb-4 d-flex flex-column flex-sm-row align-items-sm-center gap-3">
-        <div class="flex-grow-1">
-            <span class="accent-chip mb-2"><i class="bi bi-lightning-charge-fill"></i> Ringkasan Hari Ini</span>
-            <h1 class="h4 fw-bold mb-1 mt-2">Selamat datang, Admin 👋</h1>
-            <p class="text-muted mb-0" style="font-size:.875rem">Pantau performa kasir, stok, dan pendapatan toko UD Jaya Mebel.</p>
-        </div>
-        <div class="text-sm-end">
-            <div class="metric-label">Pendapatan Hari Ini</div>
-            <div class="metric-value" style="color:var(--accent)">Rp {{ number_format($todayRevenue, 0, ',', '.') }}</div>
-        </div>
-    </div>
-
     {{-- Stat Cards --}}
     <div class="row g-3 mb-4">
         <div class="col-6 col-xl-3">

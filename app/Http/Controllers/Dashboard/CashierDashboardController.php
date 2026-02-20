@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 class CashierDashboardController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth', 'role:kasir']);
-    }
-
     public function index(Request $request): View
     {
         $cashier = $request->user();

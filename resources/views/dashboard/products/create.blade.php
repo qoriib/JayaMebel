@@ -4,19 +4,9 @@
 @section('page-title', 'Tambah Produk')
 
 @section('content')
-    <div class="d-flex align-items-center gap-3 mb-4">
-        <a href="{{ route('admin.products.index') }}" class="btn-outline-custom d-flex align-items-center gap-1 text-decoration-none" style="font-size:.85rem">
-            <i class="bi bi-arrow-left"></i> Kembali
-        </a>
-        <div>
-            <h1 class="h5 fw-bold mb-0">Tambah Produk Baru</h1>
-            <p class="text-muted mb-0" style="font-size:.8rem">Isi informasi produk yang ingin ditambahkan</p>
-        </div>
-    </div>
-
     <div class="row justify-content-center">
         <div class="col-12 col-lg-8">
-            <div class="section-card">
+            <div class="glass-panel p-4">
                 <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data" class="vstack gap-4">
                     @csrf
 
@@ -47,7 +37,7 @@
                         @error('gambar')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-                        <small class="text-muted">Format JPG, PNG, atau WebP. Maks. 2 MB.</small>
+                        <div class="form-text">Format JPG, PNG, atau WebP. Maks. 2 MB.</div>
                     </div>
 
                     <div class="row g-3">
@@ -83,11 +73,11 @@
                         @enderror
                     </div>
 
-                    <div class="d-flex gap-3 pt-2">
-                        <button type="submit" class="btn-accent flex-grow-1">
+                    <div class="d-flex gap-2 pt-2">
+                        <button type="submit" class="btn btn-primary flex-grow-1">
                             <i class="bi bi-box-seam me-1"></i> Simpan Produk
                         </button>
-                        <a href="{{ route('admin.products.index') }}" class="btn-outline-custom text-decoration-none">Batal</a>
+                        <a href="{{ route('admin.products.index') }}" class="btn btn-outline-danger">Batal</a>
                     </div>
                 </form>
             </div>
