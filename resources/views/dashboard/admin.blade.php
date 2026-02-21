@@ -78,14 +78,7 @@
                 <tbody>
                     @forelse ($recentSales as $sale)
                         <tr>
-                            <td>
-                                <div class="d-flex align-items-center gap-2">
-                                    <div style="width:30px;height:30px;border-radius:50%;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:var(--accent)">
-                                        {{ strtoupper(substr($sale->cashier?->nama ?? 'U', 0, 1)) }}
-                                    </div>
-                                    {{ $sale->cashier?->nama ?? 'Tidak diketahui' }}
-                                </div>
-                            </td>
+                            <td>{{ $sale->cashier?->nama ?? 'Tidak diketahui' }}</td>
                             <td class="text-muted" style="font-size:.875rem">{{ $sale->tanggal_penjualan->format('d M Y, H:i') }}</td>
                             <td class="text-end fw-semibold" style="color:var(--accent)">Rp {{ number_format($sale->total_harga, 0, ',', '.') }}</td>
                         </tr>

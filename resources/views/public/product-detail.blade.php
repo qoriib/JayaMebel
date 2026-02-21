@@ -161,10 +161,6 @@
                             <i class="bi bi-envelope"></i> Email
                         </a>
                     </div>
-                    <a href="{{ route('landing') }}#catalogue"
-                       class="text-center" style="font-size:.82rem;color:var(--text-muted);text-decoration:none">
-                        <i class="bi bi-arrow-left me-1"></i>Kembali ke katalog
-                    </a>
                 </div>
             </div>
         </div>
@@ -173,11 +169,8 @@
     {{-- ── Related Products ── --}}
     @if ($related->isNotEmpty())
         <section class="mb-2">
-            <div class="d-flex align-items-end justify-content-between mb-3 gap-2">
-                <div>
-                    <span class="accent-chip mb-2"><i class="bi bi-grid-3x3-gap"></i> Produk lainnya</span>
-                    <h2 class="h4 fw-bold mb-0">Mungkin Anda suka</h2>
-                </div>
+            <div class="d-flex align-items-end justify-content-between mb-3 py-3 gap-2">
+                <h2 class="h4 fw-bold mb-0">Mungkin Anda suka</h2>
                 <a href="{{ route('landing') }}#catalogue" class="btn-outline-accent" style="padding:.4rem 1rem;font-size:.82rem">
                     Lihat semua &rarr;
                 </a>
@@ -190,7 +183,7 @@
                                 <img src="{{ asset('storage/'.$item->gambar) }}"
                                      alt="{{ $item->nama_produk }}" class="card-img">
                             @else
-                                <img src="https://placehold.co/400x300/f1ede6/c07a36?text={{ urlencode($item->nama_produk) }}"
+                                <img src="https://placehold.co/400x300/f1ede6/c07a36"
                                      alt="{{ $item->nama_produk }}" class="card-img">
                             @endif
                             <div class="card-body">

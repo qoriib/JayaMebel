@@ -60,6 +60,22 @@ return [
             'report' => false,
         ],
 
+        'r2' => [
+            'driver' => 's3',
+            'key' => env('R2_ACCESS_KEY_ID'),
+            'secret' => env('R2_SECRET_ACCESS_KEY'),
+            // Cloudflare R2 region must always be "auto"
+            'region' => 'auto',
+            'bucket' => env('R2_BUCKET'),
+            // Public URL for the bucket (custom domain or r2.dev subdomain)
+            'url' => env('R2_URL'),
+            // Endpoint format: https://<ACCOUNT_ID>.r2.cloudflarestorage.com
+            'endpoint' => env('R2_ENDPOINT'),
+            'use_path_style_endpoint' => false,
+            'throw' => false,
+            'report' => false,
+        ],
+
     ],
 
     /*

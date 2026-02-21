@@ -31,24 +31,6 @@
                     <a href="{{ route('landing') }}#custom" class="nav-link-custom">Custom Order</a>
                     <a href="{{ route('landing') }}#kontak" class="nav-link-custom">Kontak</a>
                 </div>
-
-                <div class="d-flex align-items-center gap-2 ms-auto ms-md-0">
-                    @auth
-                        <a href="{{ route('dashboard.index') }}" class="btn-accent">
-                            <i class="bi bi-speedometer2"></i>
-                            <span class="d-none d-sm-inline">Dashboard</span>
-                        </a>
-                    @else
-                        <a href="{{ route('login') }}" class="btn-outline-accent d-none d-sm-flex">Masuk</a>
-                        <a href="{{ route('login') }}" class="btn-accent">
-                            <i class="bi bi-person"></i>
-                            <span class="d-none d-sm-inline">Masuk</span>
-                        </a>
-                    @endauth
-                    <button id="nav-toggler" class="d-md-none" onclick="document.getElementById('nav-menu').classList.toggle('show')">
-                        <i class="bi bi-list"></i>
-                    </button>
-                </div>
             </div>
         </nav>
 
@@ -108,25 +90,12 @@
                         </div>
                     </div>
 
-                    <div class="col-6 col-md-2 offset-md-1">
+                    <div class="col-6 col-md-3 offset-md-1">
                         <p class="footer-heading">Menu</p>
                         <a href="{{ route('landing') }}" class="footer-link">Beranda</a>
                         <a href="{{ route('landing') }}#catalogue" class="footer-link">Katalog Produk</a>
                         <a href="{{ route('landing') }}#custom" class="footer-link">Custom Order</a>
                         <a href="{{ route('landing') }}#kontak" class="footer-link">Hubungi Kami</a>
-                    </div>
-
-                    <div class="col-6 col-md-2">
-                        <p class="footer-heading">Akun</p>
-                        @auth
-                            <a href="{{ route('dashboard.index') }}" class="footer-link">Dashboard</a>
-                            <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                                @csrf
-                                <button type="submit" class="footer-link border-0 bg-transparent p-0 text-start" style="cursor:pointer">Keluar</button>
-                            </form>
-                        @else
-                            <a href="{{ route('login') }}" class="footer-link">Masuk</a>
-                        @endauth
                     </div>
 
                     <div class="col-12 col-md-3" id="kontak">
@@ -148,12 +117,12 @@
 
                 <div class="footer-bottom d-flex flex-wrap align-items-center justify-content-between gap-2">
                     <span>&copy; {{ date('Y') }} UD Jaya Mebel. Hak cipta dilindungi.</span>
-                    <span>Dibuat dengan <i class="bi bi-heart-fill" style="color:var(--accent)"></i> untuk pelanggan setia kami</span>
+                    <span>Dibuat untuk pelanggan setia kami</span>
                 </div>
             </div>
         </footer>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
         @stack('scripts')
     </body>
 </html>

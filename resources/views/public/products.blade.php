@@ -8,14 +8,11 @@
     <section class="glass-panel p-4 p-lg-5 mb-4">
         <div class="row g-4 g-lg-5 align-items-center">
             <div class="col-lg-6">
-                <span class="accent-chip mb-3">
-                    <i class="bi bi-stars"></i> Furnitur kustom &amp; siap kirim
-                </span>
                 <h1 class="fw-bold mb-3" style="font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.2">
                     Rancang Ruang Idaman Bersama <span style="color:var(--accent)">UD Jaya Mebel</span>
                 </h1>
                 <p class="mb-4" style="font-size:.95rem;color:var(--text-muted);line-height:1.7">
-                    Kurasi sofa, meja, hingga lemari dengan finishing premium. Semua stok tersedia untuk pesanan cepat dan bisa disesuaikan mengikuti ukuran ruangan Anda.
+                    Sofa, meja, hingga lemari dengan finishing premium. Semua stok tersedia untuk pesanan cepat dan bisa disesuaikan mengikuti ukuran ruangan Anda.
                 </p>
 
                 <div class="d-flex flex-wrap gap-3 mb-4" style="font-size:.875rem;color:var(--text-muted)">
@@ -35,12 +32,6 @@
                         <div class="stat-item">
                             <div class="stat-value">{{ number_format($stats['orders_served']) }}</div>
                             <div class="stat-label">Pesanan berhasil</div>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="stat-item">
-                            <div class="stat-value">{{ number_format($stats['custom_requests']) }}</div>
-                            <div class="stat-label">Proyek kustom/bln</div>
                         </div>
                     </div>
                 </div>
@@ -124,11 +115,8 @@
     {{-- ── Best Sellers ── --}}
     @if ($bestSellers->isNotEmpty())
         <section class="mb-4">
-            <div class="d-flex flex-wrap align-items-end justify-content-between mb-3 gap-2">
-                <div>
-                    <span class="accent-chip mb-2"><i class="bi bi-fire"></i> Terlaris</span>
-                    <h2 class="h4 fw-bold mb-0">Koleksi paling banyak diminati</h2>
-                </div>
+            <div class="d-flex flex-wrap align-items-end justify-content-between mb-3 py-3 gap-2">
+                <h2 class="h4 fw-bold mb-0">Koleksi paling banyak diminati</h2>
                 <a href="#catalogue" class="btn-outline-accent" style="padding:.4rem 1rem;font-size:.82rem">Lihat semua &rarr;</a>
             </div>
             <div class="row g-3">
@@ -157,52 +145,6 @@
                                     <span class="badge text-bg-warning" style="font-size:.7rem;border-radius:999px">
                                         <i class="bi bi-fire me-1"></i>{{ number_format($item->total_terjual) }} terjual
                                     </span>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                @endforeach
-            </div>
-        </section>
-    @endif
-
-    {{-- ── New Arrivals ── --}}
-    @if ($newArrivals->isNotEmpty())
-        <section class="mb-4">
-            <div class="d-flex flex-wrap align-items-end justify-content-between mb-3 gap-2">
-                <div>
-                    <span class="accent-chip mb-2"><i class="bi bi-stars"></i> Baru tiba</span>
-                    <h2 class="h4 fw-bold mb-0">Produk terbaru minggu ini</h2>
-                </div>
-                <span style="font-size:.82rem;color:var(--text-muted)">
-                    Mulai dari Rp {{ number_format($newArrivals->min('harga'), 0, ',', '.') }}
-                </span>
-            </div>
-            <div class="row g-3">
-                @foreach ($newArrivals as $arrival)
-                    <div class="col-6 col-lg-3">
-                        <article class="product-card">
-                            <a href="{{ route('product.show', $arrival) }}">
-                                @if ($arrival->gambar)
-                                    <img src="{{ asset('storage/'.$arrival->gambar) }}"
-                                         alt="{{ $arrival->nama_produk }}" class="card-img">
-                                @else
-                                    <img src="https://placehold.co/400x300/f1ede6/c07a36"
-                                         alt="{{ $arrival->nama_produk }}" class="card-img">
-                                @endif
-                            </a>
-                            <div class="card-body">
-                                <div class="mb-1">
-                                    <span class="badge text-bg-success" style="font-size:.68rem;border-radius:999px">Baru</span>
-                                </div>
-                                <h3 class="fw-semibold mb-1 text-truncate" style="font-size:.88rem">
-                                    <a href="{{ route('product.show', $arrival) }}" style="color:inherit;text-decoration:none">{{ $arrival->nama_produk }}</a>
-                                </h3>
-                                <div class="d-flex align-items-center justify-content-between gap-2">
-                                    <span class="fw-bold" style="color:var(--accent);font-size:.9rem">Rp {{ number_format($arrival->harga, 0, ',', '.') }}</span>
-                                    <a href="{{ route('product.show', $arrival) }}" style="font-size:.75rem;color:var(--accent);text-decoration:none">
-                                        Detail <i class="bi bi-arrow-right"></i>
-                                    </a>
                                 </div>
                             </div>
                         </article>
@@ -312,6 +254,50 @@
             </div>
         @endif
     </section>
+
+    
+    {{-- ── New Arrivals ── --}}
+    @if ($newArrivals->isNotEmpty())
+        <section class="mb-4">
+            <div class="d-flex flex-wrap align-items-end justify-content-between mb-3 py-3 gap-2">
+                <h2 class="h4 fw-bold mb-0">Produk terbaru minggu ini</h2>
+                <span style="font-size:.82rem;color:var(--text-muted)">
+                    Mulai dari Rp {{ number_format($newArrivals->min('harga'), 0, ',', '.') }}
+                </span>
+            </div>
+            <div class="row g-3">
+                @foreach ($newArrivals as $arrival)
+                    <div class="col-6 col-lg-3">
+                        <article class="product-card">
+                            <a href="{{ route('product.show', $arrival) }}">
+                                @if ($arrival->gambar)
+                                    <img src="{{ asset('storage/'.$arrival->gambar) }}"
+                                         alt="{{ $arrival->nama_produk }}" class="card-img">
+                                @else
+                                    <img src="https://placehold.co/400x300/f1ede6/c07a36"
+                                         alt="{{ $arrival->nama_produk }}" class="card-img">
+                                @endif
+                            </a>
+                            <div class="card-body">
+                                <div class="mb-1">
+                                    <span class="badge text-bg-success" style="font-size:.68rem;border-radius:999px">Baru</span>
+                                </div>
+                                <h3 class="fw-semibold mb-1 text-truncate" style="font-size:.88rem">
+                                    <a href="{{ route('product.show', $arrival) }}" style="color:inherit;text-decoration:none">{{ $arrival->nama_produk }}</a>
+                                </h3>
+                                <div class="d-flex align-items-center justify-content-between gap-2">
+                                    <span class="fw-bold" style="color:var(--accent);font-size:.9rem">Rp {{ number_format($arrival->harga, 0, ',', '.') }}</span>
+                                    <a href="{{ route('product.show', $arrival) }}" style="font-size:.75rem;color:var(--accent);text-decoration:none">
+                                        Detail <i class="bi bi-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                @endforeach
+            </div>
+        </section>
+    @endif
 
     {{-- ── Custom Order CTA ── --}}
     <section class="glass-panel p-4 p-lg-5 mb-2" id="custom" style="background:linear-gradient(135deg,var(--surface),var(--surface-alt))">

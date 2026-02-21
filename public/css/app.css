@@ -309,3 +309,49 @@ body {
     #nav-menu { display: none; }
     #nav-menu.show { display: flex !important; }
 }
+
+/* ── Pagination ── */
+.pagination {
+    gap: .25rem;
+    margin-bottom: 0;
+}
+
+.page-item .page-link {
+    border-radius: 8px !important;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    background: var(--surface);
+    font-size: .85rem;
+    font-weight: 500;
+    padding: .45rem .8rem;
+    line-height: 1.4;
+    transition: background .18s, color .18s, border-color .18s;
+    min-width: 36px;
+    text-align: center;
+}
+
+.page-item .page-link:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.page-item.active .page-link {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(192, 122, 54, .28);
+}
+
+.page-item.disabled .page-link {
+    background: var(--surface-alt);
+    border-color: var(--border-color);
+    color: var(--text-muted);
+    opacity: .6;
+}
+
+.page-item:first-child .page-link,
+.page-item:last-child .page-link {
+    font-size: .9rem;
+}

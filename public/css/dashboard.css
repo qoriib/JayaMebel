@@ -323,7 +323,6 @@ html, body {
     background: var(--accent);
     color: #fff;
     border: none;
-    border-radius: 10px;
     font-weight: 600;
     font-size: 0.875rem;
     padding: 0.55rem 1.25rem;
@@ -332,6 +331,49 @@ html, body {
 
 .btn-primary-custom:hover {
     background: var(--accent-dark);
+    color: #fff;
+}
+
+.btn-accent {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: .45rem 1.2rem;
+    font-size: .85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background .2s, transform .15s;
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    cursor: pointer;
+}
+
+.btn-accent:hover {
+    background: var(--accent-dark);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.btn-outline-accent {
+    background: transparent;
+    color: var(--accent);
+    border: 1.5px solid var(--accent);
+    border-radius: 999px;
+    padding: .4rem 1.1rem;
+    font-size: .85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background .2s, color .2s;
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    cursor: pointer;
+}
+
+.btn-outline-accent:hover {
+    background: var(--accent);
     color: #fff;
 }
 
@@ -391,4 +433,50 @@ html, body {
     .page-body {
         padding: 2rem 2rem;
     }
+}
+
+/* ── Pagination ── */
+.pagination {
+    gap: .25rem;
+    margin-bottom: 0;
+}
+
+.page-item .page-link {
+    border-radius: 8px !important;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    background: var(--surface);
+    font-size: .82rem;
+    font-weight: 500;
+    padding: .4rem .75rem;
+    line-height: 1.4;
+    transition: background .18s, color .18s, border-color .18s;
+    min-width: 34px;
+    text-align: center;
+}
+
+.page-item .page-link:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.page-item.active .page-link {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(192, 122, 54, .28);
+}
+
+.page-item.disabled .page-link {
+    background: var(--surface-alt);
+    border-color: var(--border-color);
+    color: var(--text-muted);
+    opacity: .6;
+}
+
+.page-item:first-child .page-link,
+.page-item:last-child .page-link {
+    font-size: .88rem;
 }

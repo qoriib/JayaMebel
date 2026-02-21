@@ -74,7 +74,7 @@
                 </div>
             </div>
             <div class="d-flex flex-wrap gap-2">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary-custom">
                     <i class="bi bi-search me-1"></i> Terapkan Filter
                 </button>
                 <a href="{{ route('dashboard.reports.sales') }}" class="btn btn-outline-secondary">
