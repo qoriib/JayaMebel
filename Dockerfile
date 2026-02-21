@@ -49,9 +49,6 @@ RUN COMPOSER_ALLOW_SUPERUSER=1 composer install \
     --no-interaction \
     --optimize-autoloader
 
-# Build frontend assets then remove node_modules
-RUN npm ci && npm run build && rm -rf node_modules
-
 # Configure nginx
 COPY conf/nginx/nginx-site.conf /etc/nginx/sites-available/default
 RUN ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
