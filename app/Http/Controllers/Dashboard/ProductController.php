@@ -18,7 +18,7 @@ class ProductController extends Controller
             ->orderBy('nama_produk')
             ->paginate(12);
 
-        return view('dashboard.products.index', compact('products',));
+        return view('dashboard.products.index', compact('products'));
     }
 
     public function create(): View
@@ -44,7 +44,7 @@ class ProductController extends Controller
             'stok_status' => $data['stok_status'],
         ]);
 
-        return redirect()->route('admin.products.index')->with('success', 'Produk baru berhasil ditambahkan.');
+        return redirect()->route('cashier.products.index')->with('success', 'Produk baru berhasil ditambahkan.');
     }
 
     public function edit(Product $product): View
@@ -72,7 +72,7 @@ class ProductController extends Controller
 
         $product->update($payload);
 
-        return redirect()->route('admin.products.index')->with('success', 'Data produk berhasil diperbarui.');
+        return redirect()->route('cashier.products.index')->with('success', 'Data produk berhasil diperbarui.');
     }
 
     public function destroy(Product $product): RedirectResponse
@@ -83,6 +83,6 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return redirect()->route('admin.products.index')->with('success', 'Produk berhasil dihapus.');
+        return redirect()->route('cashier.products.index')->with('success', 'Produk berhasil dihapus.');
     }
 }

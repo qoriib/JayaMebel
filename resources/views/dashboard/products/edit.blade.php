@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-12 col-lg-8">
             <div class="glass-panel p-4">
-                <form action="{{ route('admin.products.update', $product) }}" method="POST" enctype="multipart/form-data" class="vstack gap-4">
+                <form action="{{ route('cashier.products.update', $product) }}" method="POST" enctype="multipart/form-data" class="vstack gap-4">
                     @csrf
                     @method('PUT')
 
@@ -95,7 +95,7 @@
                         <button type="submit" class="btn btn-primary flex-grow-1">
                             <i class="bi bi-check-lg me-1"></i> Simpan Perubahan
                         </button>
-                        <a href="{{ route('admin.products.index') }}" class="btn btn-outline-danger">Batal</a>
+                        <a href="{{ route('cashier.products.index') }}" class="btn btn-outline-danger">Batal</a>
                     </div>
                 </form>
             </div>

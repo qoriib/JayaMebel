@@ -13,9 +13,6 @@ class CashierDashboardController extends Controller
         $cashier = $request->user();
 
         $totalSales = $cashier->sales()->count();
-        $todayRevenue = $cashier->sales()
-            ->whereDate('tanggal_penjualan', now()->toDateString())
-            ->sum('total_harga');
         $latestSales = $cashier->sales()
             ->with('details.product')
             ->latest('tanggal_penjualan')
@@ -25,7 +22,6 @@ class CashierDashboardController extends Controller
         return view('dashboard.cashier', [
             'cashier' => $cashier,
             'totalSales' => $totalSales,
-            'todayRevenue' => $todayRevenue,
             'latestSales' => $latestSales,
         ]);
     }

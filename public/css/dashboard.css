@@ -195,7 +195,7 @@ html, body {
     border-bottom: 1px solid var(--border-color);
     display: flex;
     align-items: center;
-    padding: 0 1.75rem;
+    padding: 0 2rem;
     gap: 1rem;
     position: sticky;
     top: 0;
@@ -372,6 +372,10 @@ html, body {
 
     #app-content {
         margin-left: 0;
+    }
+
+    #app-topbar {
+        padding: 0 1rem;
     }
 
     .topbar-toggle {

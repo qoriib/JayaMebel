@@ -35,13 +35,6 @@ Route::middleware(['auth', 'role:admin'])
         Route::put('/cashiers/{cashier}', [CashierController::class, 'update'])->name('cashiers.update');
         Route::delete('/cashiers/{cashier}', [CashierController::class, 'destroy'])->name('cashiers.destroy');
 
-        Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-        Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-        Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-        Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
-        Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
-        Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
-
         Route::get('/reports/sales', [SaleReportController::class, 'index'])->name('reports.sales');
         Route::get('/reports/sales/print', [SaleReportController::class, 'print'])->name('reports.sales.print');
 
@@ -59,4 +52,11 @@ Route::middleware(['auth', 'role:kasir'])
         Route::get('/sales/create', [SaleController::class, 'create'])->name('sales.create');
         Route::post('/sales', [SaleController::class, 'store'])->name('sales.store');
         Route::delete('/sales/{sale}', [SaleController::class, 'destroy'])->name('sales.destroy');
+
+        Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+        Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+        Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+        Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+        Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+        Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
     });

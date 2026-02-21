@@ -45,9 +45,6 @@
                         <a href="{{ route('admin.cashiers.index') }}" class="sidebar-link {{ request()->routeIs('admin.cashiers.*') ? 'active' : '' }}">
                             <i class="bi bi-people"></i> Data Kasir
                         </a>
-                        <a href="{{ route('admin.products.index') }}" class="sidebar-link {{ request()->routeIs('admin.products.*') ? 'active' : '' }}">
-                            <i class="bi bi-box-seam"></i> Data Produk
-                        </a>
                         <div class="sidebar-section-label">Laporan</div>
                         <a href="{{ route('admin.reports.sales') }}" class="sidebar-link {{ request()->routeIs('admin.reports.sales*') ? 'active' : '' }}">
                             <i class="bi bi-bar-chart-line"></i> Laporan Penjualan
@@ -63,6 +60,10 @@
                         <div class="sidebar-section-label">Transaksi</div>
                         <a href="{{ route('cashier.sales.index') }}" class="sidebar-link {{ request()->routeIs('cashier.sales.*') ? 'active' : '' }}">
                             <i class="bi bi-cart3"></i> Penjualan
+                        </a>
+                        <div class="sidebar-section-label">Inventori</div>
+                        <a href="{{ route('cashier.products.index') }}" class="sidebar-link {{ request()->routeIs('cashier.products.*') ? 'active' : '' }}">
+                            <i class="bi bi-box-seam"></i> Data Produk
                         </a>
                     @endif
                 </nav>

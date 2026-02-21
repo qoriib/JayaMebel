@@ -3,34 +3,7 @@
 @section('title', 'Dashboard Kasir | UD Jaya Mebel')
 @section('page-title', 'Dashboard')
 
-@section('sidebar-links')
-    <div class="sidebar-section-label">Utama</div>
-    <a href="{{ route('cashier.dashboard') }}" class="sidebar-link {{ request()->routeIs('cashier.dashboard') ? 'active' : '' }}">
-        <i class="bi bi-speedometer2"></i> Dashboard
-    </a>
-    <div class="sidebar-section-label">Transaksi</div>
-    <a href="{{ route('cashier.sales.create') }}" class="sidebar-link {{ request()->routeIs('cashier.sales.create') ? 'active' : '' }}">
-        <i class="bi bi-cart-plus"></i> Catat Penjualan
-    </a>
-    <a href="{{ route('cashier.sales.index') }}" class="sidebar-link {{ request()->routeIs('cashier.sales.index') ? 'active' : '' }}">
-        <i class="bi bi-clock-history"></i> Riwayat Penjualan
-    </a>
-@endsection
-
 @section('content')
-    {{-- Welcome Banner --}}
-    <div class="glass-panel p-4 mb-4 d-flex flex-column flex-sm-row align-items-sm-center gap-3">
-        <div class="flex-grow-1">
-            <span class="accent-chip mb-2"><i class="bi bi-briefcase-fill"></i> Mode Kasir</span>
-            <h1 class="h4 fw-bold mb-1 mt-2">Hai, {{ $cashier->nama }} 👋</h1>
-            <p class="text-muted mb-0" style="font-size:.875rem">Pantau kinerja pribadi dan lanjutkan transaksi yang tertunda.</p>
-        </div>
-        <div class="text-sm-end">
-            <div class="metric-label">Pendapatan Hari Ini</div>
-            <div class="metric-value" style="color:var(--accent)">Rp {{ number_format($todayRevenue, 0, ',', '.') }}</div>
-        </div>
-    </div>
-
     {{-- Stat Cards --}}
     <div class="row g-3 mb-4">
         <div class="col-12 col-sm-6">
