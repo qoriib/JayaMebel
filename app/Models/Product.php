@@ -44,7 +44,7 @@ class Product extends Model
             return null;
         }
 
-        return Storage::disk(config('filesystems.product_disk'))->url($this->gambar);
+        return Storage::disk('r2')->url($this->gambar);
     }
 
     /**

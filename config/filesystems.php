@@ -17,18 +17,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Product Image Storage Disk
-    |--------------------------------------------------------------------------
-    |
-    | The disk used to store and serve product images. Set PRODUCT_STORAGE_DISK
-    | to "r2" in .env to use Cloudflare R2 instead of the local public disk.
-    |
-    */
-
-    'product_disk' => env('PRODUCT_STORAGE_DISK', 'public'),
-
-    /*
-    |--------------------------------------------------------------------------
     | Filesystem Disks
     |--------------------------------------------------------------------------
     |
@@ -74,18 +62,15 @@ return [
 
         'r2' => [
             'driver' => 's3',
-            'key' => env('R2_ACCESS_KEY_ID'),
-            'secret' => env('R2_SECRET_ACCESS_KEY'),
-            // Cloudflare R2 region must always be "auto"
-            'region' => 'auto',
-            'bucket' => env('R2_BUCKET'),
-            // Public URL for the bucket (custom domain or r2.dev subdomain)
-            'url' => env('R2_URL'),
-            // Endpoint format: https://<ACCOUNT_ID>.r2.cloudflarestorage.com
-            'endpoint' => env('R2_ENDPOINT'),
-            'use_path_style_endpoint' => false,
+            'key' => env('CLOUDFLARE_R2_ACCESS_KEY_ID'),
+            'secret' => env('CLOUDFLARE_R2_SECRET_ACCESS_KEY'),
+            'region' => 'us-east-1',
+            'bucket' => env('CLOUDFLARE_R2_BUCKET'),
+            'url' => env('CLOUDFLARE_R2_URL'),
+            'visibility' => 'private',
+            'endpoint' => env('CLOUDFLARE_R2_ENDPOINT'),
+            'use_path_style_endpoint' => env('CLOUDFLARE_R2_USE_PATH_STYLE_ENDPOINT', true),
             'throw' => false,
-            'report' => false,
         ],
 
     ],

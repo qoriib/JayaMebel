@@ -49,9 +49,7 @@
 
             <div class="col-lg-6">
                 <div class="glass-panel p-4" style="background:var(--surface-alt)">
-                    <h2 class="h5 fw-bold mb-4">
-                        <i class="bi bi-search me-2" style="color:var(--accent)"></i>Cari furnitur yang pas
-                    </h2>
+                    <h2 class="h5 fw-bold mb-4">Cari furnitur yang pas</h2>
                     <form method="GET" action="{{ route('landing') }}" class="vstack gap-3">
                         <div>
                             <label for="search" class="form-label fw-semibold" style="font-size:.82rem">Kata kunci</label>

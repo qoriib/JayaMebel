@@ -31,7 +31,7 @@
                 <div class="d-none d-md-flex align-items-center gap-1">
                     <a href="{{ route('landing') }}" class="nav-link-custom {{ request()->routeIs('landing') ? 'active' : '' }}">Beranda</a>
                     <a href="{{ route('landing') }}#catalogue" class="nav-link-custom">Katalog</a>
-                    <a href="{{ route('landing') }}#custom" class="nav-link-custom">Custom Order</a>
+                    <a href="{{ route('landing') }}#custom" class="nav-link-custom">Custom</a>
                     <a href="{{ route('landing') }}#kontak" class="nav-link-custom">Kontak</a>
                 </div>
 

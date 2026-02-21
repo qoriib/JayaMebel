@@ -32,7 +32,7 @@ class ProductController extends Controller
         $gambarPath = null;
 
         if ($request->hasFile('gambar')) {
-            $gambarPath = $request->file('gambar')->store('products', config('filesystems.product_disk'));
+            $gambarPath = $request->file('gambar')->store('products', 'r2');
         }
 
         Product::query()->create([
@@ -65,9 +65,9 @@ class ProductController extends Controller
 
         if ($request->hasFile('gambar')) {
             if ($product->gambar) {
-                Storage::disk(config('filesystems.product_disk'))->delete($product->gambar);
+                Storage::disk('r2')->delete($product->gambar);
             }
-            $payload['gambar'] = $request->file('gambar')->store('products', config('filesystems.product_disk'));
+            $payload['gambar'] = $request->file('gambar')->store('products', 'r2');
         }
 
         $product->update($payload);
@@ -78,7 +78,7 @@ class ProductController extends Controller
     public function destroy(Product $product): RedirectResponse
     {
         if ($product->gambar) {
-            Storage::disk(config('filesystems.product_disk'))->delete($product->gambar);
+            Storage::disk('r2')->delete($product->gambar);
         }
 
         $product->delete();
