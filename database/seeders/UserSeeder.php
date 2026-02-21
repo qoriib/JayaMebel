@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
             'nama' => 'Budi Santoso',
             'email' => 'admin@jayamebel.id',
             'role' => 'admin',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('password123'),
             'email_verified_at' => now(),
         ]);
 
@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
                 'nama' => $cashier['nama'],
                 'email' => $cashier['email'],
                 'role' => 'kasir',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('password123'),
                 'email_verified_at' => now(),
             ]);
         }
