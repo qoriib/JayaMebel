@@ -10,6 +10,8 @@ use App\Http\Controllers\Dashboard\StockReportController;
 use App\Http\Controllers\Landing\ProductController as LandingProductController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/health', fn () => response('OK', 200))->name('health');
+
 Route::get('/', [LandingProductController::class, 'index'])->name('landing');
 Route::get('/products/{product}', [LandingProductController::class, 'show'])->name('product.show');
 
