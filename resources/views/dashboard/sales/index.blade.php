@@ -3,74 +3,45 @@
 @section('title', 'Riwayat Penjualan | UD Jaya Mebel')
 @section('page-title', 'Riwayat Penjualan')
 
-@section('sidebar-links')
-    <div class="sidebar-section-label">Utama</div>
-    <a href="{{ route('cashier.dashboard') }}" class="sidebar-link {{ request()->routeIs('cashier.dashboard') ? 'active' : '' }}">
-        <i class="bi bi-speedometer2"></i> Dashboard
-    </a>
-    <div class="sidebar-section-label">Transaksi</div>
-    <a href="{{ route('cashier.sales.create') }}" class="sidebar-link {{ request()->routeIs('cashier.sales.create') ? 'active' : '' }}">
-        <i class="bi bi-cart-plus"></i> Catat Penjualan
-    </a>
-    <a href="{{ route('cashier.sales.index') }}" class="sidebar-link {{ request()->routeIs('cashier.sales.index') ? 'active' : '' }}">
-        <i class="bi bi-clock-history"></i> Riwayat Penjualan
-    </a>
-@endsection
-
 @section('content')
-    @if (session('success'))
-        <div class="alert alert-success alert-dismissible mb-4" role="alert"
-             style="border-radius:10px;border:none;background:#d1fae5;color:#065f46">
-            <i class="bi bi-check-circle me-2"></i>{{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    @endif
-
     {{-- Stat Cards --}}
     <div class="row g-3 mb-4">
-        <div class="col-12 col-sm-4">
-            <div class="section-card d-flex align-items-center gap-3 py-3">
-                <div style="width:48px;height:48px;border-radius:12px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                    <i class="bi bi-receipt" style="font-size:1.3rem;color:var(--accent)"></i>
+        <div class="col-12 col-sm-6">
+            <div class="metric-card h-100">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <div style="width:38px;height:38px;border-radius:10px;background:rgba(111,66,193,.1);display:flex;align-items:center;justify-content:center">
+                        <i class="bi bi-receipt" style="color:#6f42c1"></i>
+                    </div>
+                    <div class="metric-label mb-0">Total Transaksi</div>
                 </div>
-                <div>
-                    <p class="text-muted mb-0" style="font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600">Total Transaksi</p>
-                    <p class="fw-bold mb-0" style="font-size:1.4rem">{{ number_format($totalTransactions) }}</p>
-                </div>
+                <div class="metric-value">{{ number_format($totalTransactions) }}</div>
+                <p class="text-muted mb-0" style="font-size:.8rem">Semua transaksi yang kamu catat</p>
             </div>
         </div>
-        <div class="col-12 col-sm-4">
-            <div class="section-card d-flex align-items-center gap-3 py-3">
-                <div style="width:48px;height:48px;border-radius:12px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                    <i class="bi bi-cash-stack" style="font-size:1.3rem;color:var(--accent)"></i>
+        <div class="col-12 col-sm-6">
+            <div class="metric-card h-100">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <div style="width:38px;height:38px;border-radius:10px;background:rgba(192,122,54,.12);display:flex;align-items:center;justify-content:center">
+                        <i class="bi bi-cash-stack" style="color:var(--accent)"></i>
+                    </div>
+                    <div class="metric-label mb-0">Pendapatan Hari Ini</div>
                 </div>
-                <div>
-                    <p class="text-muted mb-0" style="font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600">Pendapatan Hari Ini</p>
-                    <p class="fw-bold mb-0 money" style="font-size:1.2rem">Rp {{ number_format($todayRevenue, 0, ',', '.') }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-sm-4">
-            <div class="section-card d-flex align-items-center gap-3 py-3">
-                <div style="width:48px;height:48px;border-radius:12px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                    <i class="bi bi-plus-square" style="font-size:1.3rem;color:var(--accent)"></i>
-                </div>
-                <div>
-                    <a href="{{ route('cashier.sales.create') }}" class="btn-accent text-decoration-none d-inline-flex align-items-center gap-1" style="font-size:.85rem">
-                        <i class="bi bi-plus-lg"></i> Transaksi Baru
-                    </a>
-                </div>
+                <div class="metric-value money" style="font-size:1.35rem">Rp {{ number_format($todayRevenue, 0, ',', '.') }}</div>
+                <p class="text-muted mb-0" style="font-size:.8rem">Total penjualan hari ini</p>
             </div>
         </div>
     </div>
 
     {{-- Table --}}
-    <div class="section-card">
-        <div class="d-flex align-items-center justify-content-between mb-3">
+    <div class="glass-panel p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
             <div>
-                <h2 class="h6 fw-bold mb-0">Semua Transaksi</h2>
+                <h2 class="h5 fw-bold mb-0">Semua Transaksi</h2>
                 <p class="text-muted mb-0" style="font-size:.8rem">{{ $sales->total() }} catatan ditemukan</p>
             </div>
+            <a href="{{ route('cashier.sales.create') }}" class="btn btn-primary-custom">
+                <i class="bi bi-plus-lg"></i> Transaksi Baru
+            </a>
         </div>
         <div class="table-responsive">
             <table class="table table-custom table-hover align-middle mb-0">
@@ -158,7 +129,7 @@
                                 <i class="bi bi-inbox d-block mb-2" style="font-size:2rem;color:var(--text-muted)"></i>
                                 <span class="text-muted">Belum ada transaksi.</span>
                                 <div class="mt-3">
-                                    <a href="{{ route('cashier.sales.create') }}" class="btn-accent text-decoration-none">Catat Transaksi Pertama</a>
+                                    <a href="{{ route('cashier.sales.create') }}" class="btn btn-primary">Catat Transaksi Pertama</a>
                                 </div>
                             </td>
                         </tr>

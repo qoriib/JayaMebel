@@ -3,31 +3,7 @@
 @section('title', 'Catat Penjualan | UD Jaya Mebel')
 @section('page-title', 'Catat Penjualan')
 
-@section('sidebar-links')
-    <div class="sidebar-section-label">Utama</div>
-    <a href="{{ route('cashier.dashboard') }}" class="sidebar-link {{ request()->routeIs('cashier.dashboard') ? 'active' : '' }}">
-        <i class="bi bi-speedometer2"></i> Dashboard
-    </a>
-    <div class="sidebar-section-label">Transaksi</div>
-    <a href="{{ route('cashier.sales.create') }}" class="sidebar-link {{ request()->routeIs('cashier.sales.create') ? 'active' : '' }}">
-        <i class="bi bi-cart-plus"></i> Catat Penjualan
-    </a>
-    <a href="{{ route('cashier.sales.index') }}" class="sidebar-link {{ request()->routeIs('cashier.sales.index') ? 'active' : '' }}">
-        <i class="bi bi-clock-history"></i> Riwayat Penjualan
-    </a>
-@endsection
-
 @section('content')
-    <div class="d-flex align-items-center gap-3 mb-4">
-        <a href="{{ route('cashier.sales.index') }}" class="btn-outline-custom d-flex align-items-center gap-1 text-decoration-none" style="font-size:.85rem">
-            <i class="bi bi-arrow-left"></i> Riwayat
-        </a>
-        <div>
-            <h1 class="h5 fw-bold mb-0">Catat Transaksi Baru</h1>
-            <p class="text-muted mb-0" style="font-size:.8rem">Tambahkan produk yang terjual kemudian simpan</p>
-        </div>
-    </div>
-
     @if ($errors->any())
         <div class="alert alert-danger alert-dismissible mb-4" role="alert"
              style="border-radius:10px;border:none;background:#fee2e2;color:#991b1b">
@@ -45,7 +21,7 @@
     <div class="row g-4">
         {{-- Form --}}
         <div class="col-12 col-xl-7">
-            <div class="section-card">
+            <div class="glass-panel p-4">
                 <form id="sale-form" action="{{ route('cashier.sales.store') }}" method="POST">
                     @csrf
 
@@ -62,9 +38,7 @@
                     <div class="mb-3">
                         <div class="d-flex align-items-center justify-content-between mb-2">
                             <label class="form-label fw-semibold mb-0">Daftar Produk Terjual</label>
-                            <button type="button" id="btn-add-item"
-                                    class="btn-outline-custom d-inline-flex align-items-center gap-1"
-                                    style="font-size:.8rem;padding:.3rem .75rem">
+                            <button type="button" id="btn-add-item" class="btn btn-primary-custom">
                                 <i class="bi bi-plus-lg"></i> Tambah Item
                             </button>
                         </div>
@@ -118,11 +92,11 @@
                         <span id="grand-total" class="fw-bold money" style="font-size:1.2rem">Rp 0</span>
                     </div>
 
-                    <div class="d-flex gap-3 pt-2">
-                        <button type="submit" class="btn-accent flex-grow-1">
+                    <div class="d-flex gap-2 pt-2">
+                        <button type="submit" class="btn btn-primary flex-grow-1">
                             <i class="bi bi-check-lg me-1"></i> Simpan Transaksi
                         </button>
-                        <a href="{{ route('cashier.sales.index') }}" class="btn-outline-custom text-decoration-none">Batal</a>
+                        <a href="{{ route('cashier.sales.index') }}" class="btn btn-outline-danger">Batal</a>
                     </div>
                 </form>
             </div>
@@ -130,10 +104,9 @@
 
         {{-- Product reference panel --}}
         <div class="col-12 col-xl-5">
-            <div class="section-card">
-                <p class="fw-semibold mb-3" style="font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted)">
-                    <i class="bi bi-box-seam me-1"></i> Referensi Produk
-                </p>
+            <div class="glass-panel p-4">
+                <h2 class="h5 fw-bold mb-1">Referensi Produk</h2>
+                <p class="text-muted mb-3" style="font-size:.8rem">Stok dan harga produk tersedia</p>
                 <div class="table-responsive">
                     <table class="table table-sm table-custom align-middle mb-0" style="font-size:.82rem">
                         <thead>
