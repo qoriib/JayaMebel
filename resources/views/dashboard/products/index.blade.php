@@ -1,7 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Data Produk | UD Jaya Mebel')
-@section('page-title', 'Data Produk')
+@section('title', 'Data Produk')
 
 @section('content')
     <div class="glass-panel p-4">

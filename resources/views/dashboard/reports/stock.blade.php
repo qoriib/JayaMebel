@@ -1,7 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Laporan Stok | UD Jaya Mebel')
-@section('page-title', 'Laporan Stok')
+@section('title', 'Laporan Stok')
 
 @section('content')
     {{-- Stat Cards --}}

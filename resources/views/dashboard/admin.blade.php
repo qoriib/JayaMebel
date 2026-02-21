@@ -1,11 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Dashboard Admin | UD Jaya Mebel')
-@section('page-title', 'Dashboard')
-
-@section('sidebar-links')
-    
-@endsection
+@section('title', 'Dashboard Admin')
 
 @section('content')
     {{-- Stat Cards --}}

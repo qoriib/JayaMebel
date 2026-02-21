@@ -1,7 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Data Kasir | UD Jaya Mebel')
-@section('page-title', 'Data Kasir')
+@section('title', 'Data Kasir')
 
 @section('content')
     <div class="glass-panel p-4">

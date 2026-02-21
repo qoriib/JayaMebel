@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Katalog Produk | UD Jaya Mebel')
+@section('title', 'Katalog Produk')
 
 @section('content')
 

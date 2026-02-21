@@ -1,7 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Catat Penjualan | UD Jaya Mebel')
-@section('page-title', 'Catat Penjualan')
+@section('title', 'Catat Penjualan')
 
 @section('content')
     @if ($errors->any())

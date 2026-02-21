@@ -1,7 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Riwayat Penjualan | UD Jaya Mebel')
-@section('page-title', 'Riwayat Penjualan')
+@section('title', 'Riwayat Penjualan')
 
 @section('content')
     {{-- Stat Cards --}}

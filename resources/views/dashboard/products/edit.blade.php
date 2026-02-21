@@ -1,7 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Edit Produk | UD Jaya Mebel')
-@section('page-title', 'Edit Produk')
+@section('title', 'Edit Produk')
 
 @section('content')
     <div class="row justify-content-center">
