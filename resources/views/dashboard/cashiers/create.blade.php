@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-12 col-md-8 col-lg-6">
             <div class="glass-panel p-4">
-                <form action="{{ route('admin.cashiers.store') }}" method="POST" class="vstack gap-3">
+                <form action="{{ route('dashboard.cashiers.store') }}" method="POST" class="vstack gap-3">
                     @csrf
 
                     <div>
@@ -51,7 +51,7 @@
                         <button type="submit" class="btn btn-primary flex-grow-1">
                             <i class="bi bi-person-plus me-1"></i> Simpan Data
                         </button>
-                        <a href="{{ route('admin.cashiers.index') }}" class="btn btn-outline-danger">Batal</a>
+                        <a href="{{ route('dashboard.cashiers.index') }}" class="btn btn-outline-danger">Batal</a>
                     </div>
                 </form>
             </div>

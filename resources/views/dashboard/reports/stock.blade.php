@@ -94,10 +94,10 @@
                 <button type="submit" class="btn btn-primary">
                     <i class="bi bi-search me-1"></i> Terapkan Filter
                 </button>
-                <a href="{{ route('admin.reports.stock') }}" class="btn btn-outline-secondary">
+                <a href="{{ route('dashboard.reports.stock') }}" class="btn btn-outline-secondary">
                     <i class="bi bi-arrow-counterclockwise me-1"></i> Reset
                 </a>
-                <a href="{{ route('admin.reports.stock.print', array_filter(request()->query())) }}"
+                <a href="{{ route('dashboard.reports.stock.print', array_filter(request()->query())) }}"
                    target="_blank" class="btn btn-dark ms-auto">
                     <i class="bi bi-printer me-1"></i> Cetak PDF
                 </a>

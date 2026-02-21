@@ -32,8 +32,8 @@ class LoginController extends Controller
 
             $user = Auth::user();
             $redirect = match ($user?->role) {
-                'admin' => route('admin.dashboard'),
-                'kasir' => route('cashier.dashboard'),
+                'admin' => route('dashboard.index'),
+                'kasir' => route('dashboard.index'),
                 default => route('landing'),
             };
 

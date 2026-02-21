@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-12 col-lg-8">
             <div class="glass-panel p-4">
-                <form action="{{ route('cashier.products.store') }}" method="POST" enctype="multipart/form-data" class="vstack gap-4">
+                <form action="{{ route('dashboard.products.store') }}" method="POST" enctype="multipart/form-data" class="vstack gap-4">
                     @csrf
 
                     <div>
@@ -77,7 +77,7 @@
                         <button type="submit" class="btn btn-primary flex-grow-1">
                             <i class="bi bi-box-seam me-1"></i> Simpan Produk
                         </button>
-                        <a href="{{ route('cashier.products.index') }}" class="btn btn-outline-danger">Batal</a>
+                        <a href="{{ route('dashboard.products.index') }}" class="btn btn-outline-danger">Batal</a>
                     </div>
                 </form>
             </div>

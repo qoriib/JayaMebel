@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-12 col-lg-8">
             <div class="glass-panel p-4">
-                <form action="{{ route('cashier.products.update', $product) }}" method="POST" enctype="multipart/form-data" class="vstack gap-4">
+                <form action="{{ route('dashboard.products.update', $product) }}" method="POST" enctype="multipart/form-data" class="vstack gap-4">
                     @csrf
                     @method('PUT')
 
@@ -36,16 +36,18 @@
                         <p class="text-muted mb-3" style="font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em">
                             <i class="bi bi-image me-1"></i> Foto Produk
                         </p>
-                        @if ($product->gambar)
-                            <div class="mb-3 d-flex align-items-center gap-3">
-                                <img src="{{ Storage::url($product->gambar) }}" alt="{{ $product->nama_produk }}"
-                                     style="width:80px;height:80px;object-fit:cover;border-radius:10px;border:1px solid var(--border-color)">
-                                <div>
-                                    <p class="mb-0 fw-semibold" style="font-size:.85rem">Foto saat ini</p>
-                                    <div class="form-text">Upload foto baru untuk menggantinya.</div>
-                                </div>
-                            </div>
-                        @endif
+
+                        {{-- Preview gambar: saat ini atau setelah dipilih --}}
+                        <div id="image-preview-wrapper" class="mb-3 {{ $product->gambar ? '' : 'd-none' }}">
+                            <img id="image-preview"
+                                 src="{{ $product->gambar ? Storage::url($product->gambar) : '' }}"
+                                 alt="{{ $product->nama_produk }}"
+                                 style="width:120px;height:120px;object-fit:cover;border-radius:12px;border:1px solid var(--border-color);display:block">
+                            <p class="mt-2 mb-0" style="font-size:.78rem;color:var(--text-muted)" id="image-preview-label">
+                                {{ $product->gambar ? 'Foto saat ini' : '' }}
+                            </p>
+                        </div>
+
                         <div>
                             <input type="file" id="gambar" name="gambar" accept="image/jpg,image/jpeg,image/png,image/webp"
                                    class="form-control @error('gambar') is-invalid @enderror">
@@ -95,7 +97,7 @@
                         <button type="submit" class="btn btn-primary flex-grow-1">
                             <i class="bi bi-check-lg me-1"></i> Simpan Perubahan
                         </button>
-                        <a href="{{ route('cashier.products.index') }}" class="btn btn-outline-danger">Batal</a>
+                        <a href="{{ route('dashboard.products.index') }}" class="btn btn-outline-danger">Batal</a>
                     </div>
                 </form>
             </div>
@@ -103,3 +105,24 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+<script>
+    document.getElementById('gambar').addEventListener('change', function () {
+        const file = this.files[0];
+        const wrapper = document.getElementById('image-preview-wrapper');
+        const preview = document.getElementById('image-preview');
+        const label   = document.getElementById('image-preview-label');
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                preview.src = e.target.result;
+                label.textContent = 'Pratinjau foto baru';
+                wrapper.classList.remove('d-none');
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+@endpush

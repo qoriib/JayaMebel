@@ -38,7 +38,7 @@ class CashierController extends Controller
             'role' => 'kasir',
         ]);
 
-        return redirect()->route('admin.cashiers.index')->with('success', 'Kasir baru berhasil ditambahkan.');
+        return redirect()->route('dashboard.cashiers.index')->with('success', 'Kasir baru berhasil ditambahkan.');
     }
 
     public function edit(User $cashier): View
@@ -64,7 +64,7 @@ class CashierController extends Controller
 
         $cashier->update($payload);
 
-        return redirect()->route('admin.cashiers.index')->with('success', 'Data kasir berhasil diperbarui.');
+        return redirect()->route('dashboard.cashiers.index')->with('success', 'Data kasir berhasil diperbarui.');
     }
 
     public function destroy(User $cashier): RedirectResponse
@@ -73,7 +73,7 @@ class CashierController extends Controller
 
         $cashier->delete();
 
-        return redirect()->route('admin.cashiers.index')->with('success', 'Kasir berhasil dihapus.');
+        return redirect()->route('dashboard.cashiers.index')->with('success', 'Kasir berhasil dihapus.');
     }
 
     private function abortIfNotCashier(User $cashier): void

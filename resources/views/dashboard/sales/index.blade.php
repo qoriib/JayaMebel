@@ -39,7 +39,7 @@
                 <h2 class="h5 fw-bold mb-0">Semua Transaksi</h2>
                 <p class="text-muted mb-0" style="font-size:.8rem">{{ $sales->total() }} catatan ditemukan</p>
             </div>
-            <a href="{{ route('cashier.sales.create') }}" class="btn btn-primary-custom">
+            <a href="{{ route('dashboard.sales.create') }}" class="btn btn-primary-custom">
                 <i class="bi bi-plus-lg"></i> Transaksi Baru
             </a>
         </div>
@@ -77,7 +77,7 @@
                                             title="Lihat detail">
                                         <i class="bi bi-chevron-down"></i>
                                     </button>
-                                    <form action="{{ route('cashier.sales.destroy', $sale) }}" method="POST"
+                                    <form action="{{ route('dashboard.sales.destroy', $sale) }}" method="POST"
                                           onsubmit="return confirm('Hapus transaksi ini? Stok produk akan dipulihkan.')">
                                         @csrf
                                         @method('DELETE')
@@ -129,7 +129,7 @@
                                 <i class="bi bi-inbox d-block mb-2" style="font-size:2rem;color:var(--text-muted)"></i>
                                 <span class="text-muted">Belum ada transaksi.</span>
                                 <div class="mt-3">
-                                    <a href="{{ route('cashier.sales.create') }}" class="btn btn-primary">Catat Transaksi Pertama</a>
+                                    <a href="{{ route('dashboard.sales.create') }}" class="btn btn-primary">Catat Transaksi Pertama</a>
                                 </div>
                             </td>
                         </tr>

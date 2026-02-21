@@ -94,4 +94,19 @@ class ProductController extends Controller
             ],
         ]);
     }
+
+    public function show(Product $product): View
+    {
+        $product->loadCount('saleDetails as total_terjual');
+
+        $related = Product::query()
+            ->where('id', '!=', $product->id)
+            ->where('stok_status', 'tersedia')
+            ->withCount('saleDetails as total_terjual')
+            ->inRandomOrder()
+            ->limit(4)
+            ->get();
+
+        return view('public.product-detail', compact('product', 'related'));
+    }
 }

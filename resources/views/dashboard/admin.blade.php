@@ -67,7 +67,7 @@
                 <h2 class="h5 fw-bold mb-0">Transaksi Terbaru</h2>
                 <p class="text-muted mb-0" style="font-size:.8rem">5 transaksi terakhir dari seluruh kasir</p>
             </div>
-            <a href="{{ route('admin.reports.sales') }}" class="btn-primary-custom text-decoration-none">
+            <a href="{{ route('dashboard.reports.sales') }}" class="btn-primary-custom text-decoration-none">
                 <i class="bi bi-arrow-right me-1"></i> Lihat Semua
             </a>
         </div>

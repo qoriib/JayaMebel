@@ -1,121 +1,162 @@
 @extends('layouts.app')
 
-@section('title', 'UD Jaya Mebel | Katalog Produk')
+@section('title', 'Katalog Produk | UD Jaya Mebel')
 
 @section('content')
-    <header class="glass-panel p-4 p-lg-5 mb-5">
-        <div class="row g-4 align-items-center">
-            <div class="col-lg-7">
-                <p class="accent-chip mb-3">
-                    <span aria-hidden="true">🛋️</span>
-                    Furnitur kustom & siap kirim
-                </p>
-                <h1 class="display-5 fw-semibold mb-3">Rancang Ruang Idaman Bersama UD Jaya Mebel</h1>
-                <p class="lead text-muted mb-4">
-                    Kurasi sofa, meja, hingga lemari dengan finishing premium. Semua stok tersedia untuk pesanan cepat dan
-                    bisa disesuaikan mengikuti ukuran ruangan Anda.
-                </p>
-                <ul class="list-unstyled d-flex flex-wrap gap-3 text-muted mb-4">
-                    <li><i class="bi bi-palette2 text-warning me-2"></i>Finishing custom</li>
-                    <li><i class="bi bi-truck text-warning me-2"></i>Pengiriman se-Indonesia</li>
-                    <li><i class="bi bi-shield-check text-warning me-2"></i>Garansi pengerjaan 30 hari</li>
-                </ul>
 
-                <div class="row g-3 text-center text-lg-start">
+    {{-- ── Hero ── --}}
+    <section class="glass-panel p-4 p-lg-5 mb-4">
+        <div class="row g-4 g-lg-5 align-items-center">
+            <div class="col-lg-6">
+                <span class="accent-chip mb-3">
+                    <i class="bi bi-stars"></i> Furnitur kustom &amp; siap kirim
+                </span>
+                <h1 class="fw-bold mb-3" style="font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.2">
+                    Rancang Ruang Idaman Bersama <span style="color:var(--accent)">UD Jaya Mebel</span>
+                </h1>
+                <p class="mb-4" style="font-size:.95rem;color:var(--text-muted);line-height:1.7">
+                    Kurasi sofa, meja, hingga lemari dengan finishing premium. Semua stok tersedia untuk pesanan cepat dan bisa disesuaikan mengikuti ukuran ruangan Anda.
+                </p>
+
+                <div class="d-flex flex-wrap gap-3 mb-4" style="font-size:.875rem;color:var(--text-muted)">
+                    <span><i class="bi bi-palette2 me-2" style="color:var(--accent)"></i>Finishing custom</span>
+                    <span><i class="bi bi-truck me-2" style="color:var(--accent)"></i>Pengiriman se-Indonesia</span>
+                    <span><i class="bi bi-shield-check me-2" style="color:var(--accent)"></i>Garansi 30 hari</span>
+                </div>
+
+                <div class="row g-3 mb-4">
                     <div class="col-4">
-                        <div class="fw-bold h3 mb-0">{{ number_format($stats['ready_products']) }}</div>
-                        <small class="text-muted">Produk siap kirim</small>
+                        <div class="stat-item">
+                            <div class="stat-value">{{ number_format($stats['ready_products']) }}</div>
+                            <div class="stat-label">Produk siap kirim</div>
+                        </div>
                     </div>
                     <div class="col-4">
-                        <div class="fw-bold h3 mb-0">{{ number_format($stats['orders_served']) }}</div>
-                        <small class="text-muted">Pesanan berhasil</small>
+                        <div class="stat-item">
+                            <div class="stat-value">{{ number_format($stats['orders_served']) }}</div>
+                            <div class="stat-label">Pesanan berhasil</div>
+                        </div>
                     </div>
                     <div class="col-4">
-                        <div class="fw-bold h3 mb-0">{{ number_format($stats['custom_requests']) }}</div>
-                        <small class="text-muted">Proyek kustom/bulan</small>
+                        <div class="stat-item">
+                            <div class="stat-value">{{ number_format($stats['custom_requests']) }}</div>
+                            <div class="stat-label">Proyek kustom/bln</div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="d-flex gap-3 flex-wrap mt-4">
-                    <a href="tel:+620000000000" class="btn btn-warning text-dark fw-semibold px-4"><i class="bi bi-telephone me-2"></i>Hubungi Kami</a>
-                    <a href="#catalogue" class="btn btn-outline-light fw-semibold px-4">Lihat Katalog</a>
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="#catalogue" class="btn-accent" style="padding:.6rem 1.4rem;font-size:.9rem">
+                        <i class="bi bi-grid-3x3-gap"></i> Lihat Katalog
+                    </a>
+                    <a href="https://wa.me/{{ config('company.whatsapp') }}" target="_blank"
+                       class="btn-outline-accent" style="padding:.55rem 1.4rem;font-size:.9rem">
+                        <i class="bi bi-whatsapp"></i> Hubungi Kami
+                    </a>
                 </div>
             </div>
-            <div class="col-lg-5">
-                <div class="glass-panel h-100 p-4" style="background:rgba(255,255,255,0.08)">
-                    <h2 class="h5 fw-semibold mb-3">Cari furnitur yang pas</h2>
+
+            <div class="col-lg-6">
+                <div class="glass-panel p-4" style="background:var(--surface-alt)">
+                    <h2 class="h5 fw-bold mb-4">
+                        <i class="bi bi-search me-2" style="color:var(--accent)"></i>Cari furnitur yang pas
+                    </h2>
                     <form method="GET" action="{{ route('landing') }}" class="vstack gap-3">
                         <div>
-                            <label for="search" class="form-label text-muted small mb-1">Cari produk</label>
+                            <label for="search" class="form-label fw-semibold" style="font-size:.82rem">Kata kunci</label>
                             <div class="input-group">
-                                <span class="input-group-text bg-transparent border-end-0"><i class="bi bi-search"></i></span>
-                                <input type="text" id="search" name="search" value="{{ $filters['search'] ?? '' }}" class="form-control border-start-0" placeholder="Kursi minimalis, bufet, meja...">
+                                <span class="input-group-text"><i class="bi bi-search"></i></span>
+                                <input type="text" id="search" name="search"
+                                       value="{{ $filters['search'] ?? '' }}"
+                                       class="form-control"
+                                       placeholder="Kursi minimalis, meja makan, lemari...">
                             </div>
                         </div>
                         <div class="row g-3">
-                            <div class="col-sm-6">
-                                <label class="form-label text-muted small mb-1">Harga minimum</label>
+                            <div class="col-6">
+                                <label class="form-label fw-semibold" style="font-size:.82rem">Harga minimum</label>
                                 <div class="input-group">
-                                    <span class="input-group-text">Rp</span>
-                                    <input type="number" min="0" name="min_price" value="{{ $filters['min_price'] ?? '' }}" class="form-control" placeholder="{{ number_format($priceRange['min'] ?? 0) }}">
+                                    <span class="input-group-text" style="font-size:.8rem">Rp</span>
+                                    <input type="number" min="0" name="min_price"
+                                           value="{{ $filters['min_price'] ?? '' }}"
+                                           class="form-control"
+                                           placeholder="{{ number_format($priceRange['min'] ?? 0) }}">
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <label class="form-label text-muted small mb-1">Harga maksimum</label>
+                            <div class="col-6">
+                                <label class="form-label fw-semibold" style="font-size:.82rem">Harga maksimum</label>
                                 <div class="input-group">
-                                    <span class="input-group-text">Rp</span>
-                                    <input type="number" min="0" name="max_price" value="{{ $filters['max_price'] ?? '' }}" class="form-control" placeholder="{{ number_format($priceRange['max'] ?? 0) }}">
+                                    <span class="input-group-text" style="font-size:.8rem">Rp</span>
+                                    <input type="number" min="0" name="max_price"
+                                           value="{{ $filters['max_price'] ?? '' }}"
+                                           class="form-control"
+                                           placeholder="{{ number_format($priceRange['max'] ?? 0) }}">
                                 </div>
                             </div>
                         </div>
                         <div>
-                            <label for="sort" class="form-label text-muted small mb-1">Urutkan</label>
+                            <label for="sort" class="form-label fw-semibold" style="font-size:.82rem">Urutkan</label>
                             <select id="sort" name="sort" class="form-select">
-                                <option value="latest" @selected(($filters['sort'] ?? 'latest') === 'latest')>Produk terbaru</option>
-                                <option value="popular" @selected(($filters['sort'] ?? '') === 'popular')>Terlaris</option>
-                                <option value="price_low" @selected(($filters['sort'] ?? '') === 'price_low')>Harga terendah</option>
+                                <option value="latest"     @selected(($filters['sort'] ?? 'latest') === 'latest')>Produk terbaru</option>
+                                <option value="popular"    @selected(($filters['sort'] ?? '') === 'popular')>Terlaris</option>
+                                <option value="price_low"  @selected(($filters['sort'] ?? '') === 'price_low')>Harga terendah</option>
                                 <option value="price_high" @selected(($filters['sort'] ?? '') === 'price_high')>Harga tertinggi</option>
                             </select>
                         </div>
-
                         <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-warning flex-grow-1 text-dark fw-semibold">Temukan Furnitur</button>
-                            <a href="{{ route('landing') }}" class="btn btn-outline-light" title="Reset filter"><i class="bi bi-arrow-counterclockwise"></i></a>
+                            <button type="submit" class="btn-accent flex-grow-1 justify-content-center"
+                                    style="padding:.6rem 1rem;font-size:.875rem;border-radius:999px;border:none;cursor:pointer">
+                                <i class="bi bi-funnel"></i> Temukan Furnitur
+                            </button>
+                            @if (($filters['search'] ?? '') !== '' || ($filters['min_price'] ?? null) !== null || ($filters['max_price'] ?? null) !== null)
+                                <a href="{{ route('landing') }}" class="btn-outline-accent"
+                                   style="padding:.55rem .9rem;font-size:.875rem" title="Reset filter">
+                                    <i class="bi bi-x-lg"></i>
+                                </a>
+                            @endif
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
+    {{-- ── Best Sellers ── --}}
     @if ($bestSellers->isNotEmpty())
-        <section class="mb-5">
-            <div class="d-flex flex-wrap align-items-center justify-content-between mb-3">
+        <section class="mb-4">
+            <div class="d-flex flex-wrap align-items-end justify-content-between mb-3 gap-2">
                 <div>
-                    <p class="text-muted text-uppercase small fw-semibold mb-1">Best Seller</p>
-                    <h2 class="h4 fw-semibold mb-0">Koleksi yang paling banyak diminati</h2>
+                    <span class="accent-chip mb-2"><i class="bi bi-fire"></i> Terlaris</span>
+                    <h2 class="h4 fw-bold mb-0">Koleksi paling banyak diminati</h2>
                 </div>
-                <a href="#catalogue" class="btn btn-sm btn-outline-light">Lihat semua</a>
+                <a href="#catalogue" class="btn-outline-accent" style="padding:.4rem 1rem;font-size:.82rem">Lihat semua &rarr;</a>
             </div>
             <div class="row g-3">
                 @foreach ($bestSellers as $item)
-                    <div class="col-md-4">
-                        <article class="glass-panel h-100 p-3 d-flex gap-3">
-                            <div class="ratio ratio-1x1" style="max-width:96px">
+                    <div class="col-12 col-md-4">
+                        <article class="glass-panel p-3 d-flex gap-3 h-100 align-items-center">
+                            <a href="{{ route('product.show', $item) }}"
+                               style="flex-shrink:0;width:90px;height:90px;border-radius:12px;overflow:hidden;border:1px solid var(--border-color);display:block">
                                 @if ($item->gambar)
-                                    <img src="{{ asset('storage/'.$item->gambar) }}" alt="{{ $item->nama_produk }}" class="rounded object-fit-cover">
+                                    <img src="{{ asset('storage/'.$item->gambar) }}" alt="{{ $item->nama_produk }}"
+                                         style="width:100%;height:100%;object-fit:cover">
                                 @else
-                                    <div class="rounded bg-dark bg-opacity-25 d-flex align-items-center justify-content-center fw-bold">
-                                        {{ strtoupper(substr($item->nama_produk, 0, 1)) }}
-                                    </div>
+                                    <img src="https://placehold.co/90x90/f1ede6/c07a36"
+                                         alt="{{ $item->nama_produk }}" style="width:100%;height:100%;object-fit:cover">
                                 @endif
-                            </div>
-                            <div class="flex-grow-1">
-                                <h3 class="h6 fw-semibold mb-1">{{ $item->nama_produk }}</h3>
-                                <p class="text-muted small mb-2">{{ \Illuminate\Support\Str::limit($item->deskripsi, 70) }}</p>
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <span class="text-warning fw-semibold">Rp {{ number_format($item->harga, 0, ',', '.') }}</span>
-                                    <span class="badge bg-primary-subtle text-primary">{{ number_format($item->total_terjual) }} terjual</span>
+                            </a>
+                            <div class="flex-grow-1 overflow-hidden">
+                                <h3 class="fw-semibold mb-1 text-truncate" style="font-size:.9rem">
+                                    <a href="{{ route('product.show', $item) }}" style="color:inherit;text-decoration:none">{{ $item->nama_produk }}</a>
+                                </h3>
+                                <p class="mb-2" style="font-size:.78rem;color:var(--text-muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">
+                                    {{ $item->deskripsi ?? 'Produk furnitur berkualitas dari UD Jaya Mebel.' }}
+                                </p>
+                                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap">
+                                    <span class="fw-bold" style="color:var(--accent);font-size:.9rem">Rp {{ number_format($item->harga, 0, ',', '.') }}</span>
+                                    <span class="badge text-bg-warning" style="font-size:.7rem;border-radius:999px">
+                                        <i class="bi bi-fire me-1"></i>{{ number_format($item->total_terjual) }} terjual
+                                    </span>
                                 </div>
                             </div>
                         </article>
@@ -125,28 +166,45 @@
         </section>
     @endif
 
+    {{-- ── New Arrivals ── --}}
     @if ($newArrivals->isNotEmpty())
-        <section class="mb-5">
-            <p class="text-muted text-uppercase small fw-semibold mb-1">Baru tiba</p>
-            <div class="d-flex flex-wrap align-items-center justify-content-between mb-3">
-                <h2 class="h4 fw-semibold mb-0">Produk terbaru minggu ini</h2>
-                <div class="text-muted small">Harga mulai Rp {{ number_format($newArrivals->min('harga'), 0, ',', '.') }}</div>
+        <section class="mb-4">
+            <div class="d-flex flex-wrap align-items-end justify-content-between mb-3 gap-2">
+                <div>
+                    <span class="accent-chip mb-2"><i class="bi bi-stars"></i> Baru tiba</span>
+                    <h2 class="h4 fw-bold mb-0">Produk terbaru minggu ini</h2>
+                </div>
+                <span style="font-size:.82rem;color:var(--text-muted)">
+                    Mulai dari Rp {{ number_format($newArrivals->min('harga'), 0, ',', '.') }}
+                </span>
             </div>
             <div class="row g-3">
                 @foreach ($newArrivals as $arrival)
                     <div class="col-6 col-lg-3">
-                        <article class="glass-panel h-100 p-3">
-                            <div class="ratio ratio-4x3 mb-3">
+                        <article class="product-card">
+                            <a href="{{ route('product.show', $arrival) }}">
                                 @if ($arrival->gambar)
-                                    <img src="{{ asset('storage/'.$arrival->gambar) }}" alt="{{ $arrival->nama_produk }}" class="rounded object-fit-cover">
+                                    <img src="{{ asset('storage/'.$arrival->gambar) }}"
+                                         alt="{{ $arrival->nama_produk }}" class="card-img">
                                 @else
-                                    <div class="rounded bg-dark bg-opacity-25 d-flex align-items-center justify-content-center fw-bold">
-                                        {{ strtoupper(substr($arrival->nama_produk, 0, 1)) }}
-                                    </div>
+                                    <img src="https://placehold.co/400x300/f1ede6/c07a36"
+                                         alt="{{ $arrival->nama_produk }}" class="card-img">
                                 @endif
+                            </a>
+                            <div class="card-body">
+                                <div class="mb-1">
+                                    <span class="badge text-bg-success" style="font-size:.68rem;border-radius:999px">Baru</span>
+                                </div>
+                                <h3 class="fw-semibold mb-1 text-truncate" style="font-size:.88rem">
+                                    <a href="{{ route('product.show', $arrival) }}" style="color:inherit;text-decoration:none">{{ $arrival->nama_produk }}</a>
+                                </h3>
+                                <div class="d-flex align-items-center justify-content-between gap-2">
+                                    <span class="fw-bold" style="color:var(--accent);font-size:.9rem">Rp {{ number_format($arrival->harga, 0, ',', '.') }}</span>
+                                    <a href="{{ route('product.show', $arrival) }}" style="font-size:.75rem;color:var(--accent);text-decoration:none">
+                                        Detail <i class="bi bi-arrow-right"></i>
+                                    </a>
+                                </div>
                             </div>
-                            <h3 class="h6 fw-semibold mb-1">{{ $arrival->nama_produk }}</h3>
-                            <span class="text-warning fw-semibold">Rp {{ number_format($arrival->harga, 0, ',', '.') }}</span>
                         </article>
                     </div>
                 @endforeach
@@ -154,16 +212,31 @@
         </section>
     @endif
 
-    <section class="glass-panel p-4 p-lg-5 mb-5" id="catalogue">
-        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+    {{-- ── Catalogue ── --}}
+    <section class="glass-panel p-4 p-lg-5 mb-4" id="catalogue">
+        <div class="d-flex flex-wrap align-items-start justify-content-between gap-3 mb-4">
             <div>
-                <p class="text-muted text-uppercase small fw-semibold mb-1">Katalog utama</p>
-                <h2 class="h4 fw-semibold mb-0">{{ number_format($products->total()) }} produk ditemukan</h2>
-                <p class="text-muted small mb-0">Menampilkan {{ $products->firstItem() }}-{{ $products->lastItem() }} dari {{ $products->total() }} produk</p>
+                <h2 class="h4 fw-bold mb-1">Katalog Produk</h2>
+                @if ($products->total() > 0)
+                    <p class="mb-0" style="font-size:.82rem;color:var(--text-muted)">
+                        Menampilkan {{ $products->firstItem() }}–{{ $products->lastItem() }} dari {{ number_format($products->total()) }} produk
+                    </p>
+                @else
+                    <p class="mb-0" style="font-size:.82rem;color:var(--text-muted)">Tidak ada produk ditemukan</p>
+                @endif
             </div>
             @if (($filters['search'] ?? '') !== '' || ($filters['min_price'] ?? null) !== null || ($filters['max_price'] ?? null) !== null)
-                <div class="badge bg-dark-subtle text-dark">
-                    Filter aktif: kata kunci "{{ $filters['search'] ?? '—' }}" · harga {{ $filters['min_price'] ?? '0' }} - {{ $filters['max_price'] ?? '∞' }}
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <span style="font-size:.78rem;color:var(--text-muted)">Filter aktif:</span>
+                    @if (($filters['search'] ?? '') !== '')
+                        <span class="accent-chip" style="font-size:.75rem;padding:.2rem .65rem">"{{ $filters['search'] }}"</span>
+                    @endif
+                    @if (($filters['min_price'] ?? null) !== null || ($filters['max_price'] ?? null) !== null)
+                        <span class="accent-chip" style="font-size:.75rem;padding:.2rem .65rem">
+                            Rp {{ number_format($filters['min_price'] ?? 0) }} – {{ $filters['max_price'] ? 'Rp '.number_format($filters['max_price']) : '∞' }}
+                        </span>
+                    @endif
+                    <a href="{{ route('landing') }}" style="font-size:.78rem;color:var(--accent);text-decoration:none">Hapus semua</a>
                 </div>
             @endif
         </div>
@@ -171,94 +244,137 @@
         <div class="row g-4">
             @forelse ($products as $product)
                 <div class="col-12 col-md-6 col-xl-4">
-                    <article class="glass-panel h-100 overflow-hidden d-flex flex-column">
-                        <div class="ratio ratio-4x3 mb-3">
+                    <article class="product-card">
+                        <a href="{{ route('product.show', $product) }}">
                             @if ($product->gambar)
-                                <img src="{{ asset('storage/'.$product->gambar) }}" alt="{{ $product->nama_produk }}" class="w-100 h-100 object-fit-cover">
+                                <img src="{{ asset('storage/'.$product->gambar) }}"
+                                     alt="{{ $product->nama_produk }}" class="card-img">
                             @else
-                                <div class="d-flex align-items-center justify-content-center bg-dark bg-opacity-25">
-                                    <span class="display-6 fw-bold text-white">{{ strtoupper(substr($product->nama_produk, 0, 1)) }}</span>
-                                </div>
+                                <img src="https://placehold.co/600x400/f1ede6/c07a36"
+                                     alt="{{ $product->nama_produk }}" class="card-img">
                             @endif
-                        </div>
-                        <div class="px-3 pb-4 d-flex flex-column flex-grow-1">
-                            <h3 class="h5 fw-semibold">{{ $product->nama_produk }}</h3>
-                            <p class="text-muted flex-grow-1">{{ \Illuminate\Support\Str::limit($product->deskripsi, 130) }}</p>
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <div>
-                                    <span class="text-warning fw-semibold d-block">Rp {{ number_format($product->harga, 0, ',', '.') }}</span>
-                                    <small class="text-muted">{{ number_format($product->total_terjual ?? 0) }} produk terjual</small>
-                                </div>
-                                <span class="badge {{ $product->stok > 0 ? 'bg-success' : 'bg-danger' }}">
-                                    {{ $product->stok > 0 ? $product->stok.' Unit tersisa' : 'Habis' }}
+                        </a>
+                        <div class="card-body">
+                            <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                                @if ($product->stok > 0)
+                                    <span class="badge-stock text-bg-success">{{ $product->stok }} unit tersedia</span>
+                                @else
+                                    <span class="badge-stock text-bg-danger">Habis</span>
+                                @endif
+                                @if ($product->total_terjual > 0)
+                                    <span style="font-size:.72rem;color:var(--text-muted)">
+                                        <i class="bi bi-fire"></i> {{ number_format($product->total_terjual) }} terjual
+                                    </span>
+                                @endif
+                            </div>
+                            <h3 class="fw-semibold mb-1" style="font-size:.95rem">
+                                <a href="{{ route('product.show', $product) }}" style="color:inherit;text-decoration:none">{{ $product->nama_produk }}</a>
+                            </h3>
+                            <p class="flex-grow-1 mb-3" style="font-size:.82rem;color:var(--text-muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">
+                                {{ $product->deskripsi ?? 'Produk furnitur berkualitas dari UD Jaya Mebel.' }}
+                            </p>
+                            <div class="mb-3">
+                                <span class="fw-bold" style="color:var(--accent);font-size:1.1rem">
+                                    Rp {{ number_format($product->harga, 0, ',', '.') }}
                                 </span>
                             </div>
                             <div class="d-flex gap-2">
-                                <a href="https://wa.me/620000000000?text=Halo%20UD%20Jaya%20Mebel,%20saya%20ingin%20pesan%20{{ urlencode($product->nama_produk) }}" target="_blank" class="btn btn-warning text-dark fw-semibold flex-grow-1">
-                                    <i class="bi bi-whatsapp me-1"></i>Pesan via WhatsApp
+                                <a href="{{ route('product.show', $product) }}"
+                                   class="btn-outline-accent flex-grow-1 justify-content-center"
+                                   style="padding:.5rem .8rem;font-size:.82rem;border-radius:10px">
+                                    <i class="bi bi-eye"></i> Detail
                                 </a>
-                                <a href="tel:+620000000000" class="btn btn-outline-light" title="Telepon"><i class="bi bi-telephone"></i></a>
+                                <a href="https://wa.me/{{ config('company.whatsapp') }}?text=Halo%20UD%20Jaya%20Mebel,%20saya%20ingin%20pesan%20{{ urlencode($product->nama_produk) }}"
+                                   target="_blank" class="btn-accent flex-grow-1 justify-content-center"
+                                   style="padding:.55rem .8rem;font-size:.82rem;border-radius:10px">
+                                    <i class="bi bi-whatsapp"></i> Pesan
+                                </a>
                             </div>
                         </div>
                     </article>
                 </div>
             @empty
                 <div class="col-12">
-                    <div class="glass-panel p-5 text-center">
-                        <p class="mb-3 text-muted">Produk tidak ditemukan sesuai pencarian Anda.</p>
-                        <a href="{{ route('landing') }}" class="btn btn-warning text-dark fw-semibold">Reset pencarian</a>
+                    <div class="text-center py-5">
+                        <i class="bi bi-inbox d-block mb-3" style="font-size:2.5rem;color:var(--text-muted)"></i>
+                        <p class="mb-3" style="color:var(--text-muted)">Produk tidak ditemukan sesuai pencarian Anda.</p>
+                        <a href="{{ route('landing') }}" class="btn-accent" style="padding:.55rem 1.4rem;font-size:.875rem">
+                            Reset pencarian
+                        </a>
                     </div>
                 </div>
             @endforelse
         </div>
 
         @if ($products->hasPages())
-            <div class="mt-4">
+            <div class="mt-4 pt-2" style="border-top:1px solid var(--border-color)">
                 {{ $products->links() }}
             </div>
         @endif
     </section>
 
-    <section class="glass-panel p-4 p-lg-5 mb-5">
-        <div class="row g-4 align-items-center">
+    {{-- ── Custom Order CTA ── --}}
+    <section class="glass-panel p-4 p-lg-5 mb-2" id="custom" style="background:linear-gradient(135deg,var(--surface),var(--surface-alt))">
+        <div class="row g-4 g-lg-5 align-items-center">
             <div class="col-lg-7">
-                <h2 class="h3 fw-bold mb-3">Mau custom ukuran? Sampaikan sketsa Anda.</h2>
-                <p class="text-muted mb-4">Tim kami siap membantu menghitung kebutuhan material, warna finishing, hingga estimasi pengiriman. Kirimkan foto referensi atau jadwalkan kunjungan showroom.</p>
+                <span class="accent-chip mb-3"><i class="bi bi-pencil-square"></i> Pesanan Kustom</span>
+                <h2 class="fw-bold mb-3" style="font-size:clamp(1.4rem,3vw,2rem)">Mau custom ukuran? Sampaikan sketsa Anda.</h2>
+                <p class="mb-4" style="font-size:.9rem;color:var(--text-muted);line-height:1.7">
+                    Tim kami siap membantu menghitung kebutuhan material, warna finishing, hingga estimasi pengiriman. Kirimkan foto referensi atau jadwalkan kunjungan showroom.
+                </p>
                 <div class="row g-3">
                     <div class="col-sm-4">
-                        <div class="p-3 rounded-4 bg-white bg-opacity-5">
-                            <div class="badge bg-warning text-dark mb-2">1</div>
-                            <p class="mb-0 fw-semibold">Bagikan inspirasi</p>
+                        <div class="p-3 text-center" style="background:var(--surface);border:1px solid var(--border-color);border-radius:12px">
+                            <div class="mb-2" style="width:36px;height:36px;border-radius:10px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;margin:0 auto">
+                                <i class="bi bi-image" style="color:var(--accent)"></i>
+                            </div>
+                            <p class="mb-0 fw-semibold" style="font-size:.82rem">Bagikan inspirasi</p>
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <div class="p-3 rounded-4 bg-white bg-opacity-5">
-                            <div class="badge bg-warning text-dark mb-2">2</div>
-                            <p class="mb-0 fw-semibold">Pilih bahan & warna</p>
+                        <div class="p-3 text-center" style="background:var(--surface);border:1px solid var(--border-color);border-radius:12px">
+                            <div class="mb-2" style="width:36px;height:36px;border-radius:10px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;margin:0 auto">
+                                <i class="bi bi-palette2" style="color:var(--accent)"></i>
+                            </div>
+                            <p class="mb-0 fw-semibold" style="font-size:.82rem">Pilih bahan &amp; warna</p>
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <div class="p-3 rounded-4 bg-white bg-opacity-5">
-                            <div class="badge bg-warning text-dark mb-2">3</div>
-                            <p class="mb-0 fw-semibold">Produksi & kirim</p>
+                        <div class="p-3 text-center" style="background:var(--surface);border:1px solid var(--border-color);border-radius:12px">
+                            <div class="mb-2" style="width:36px;height:36px;border-radius:10px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;margin:0 auto">
+                                <i class="bi bi-truck" style="color:var(--accent)"></i>
+                            </div>
+                            <p class="mb-0 fw-semibold" style="font-size:.82rem">Produksi &amp; kirim</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-5">
-                <div class="glass-panel h-100 p-4">
-                    <h3 class="h5 fw-semibold mb-2">Butuh konsultasi cepat?</h3>
-                    <p class="text-muted">Tim sales kami online setiap hari kerja 09.00-20.00 WIB.</p>
-                    <div class="d-flex flex-column gap-2">
-                        <a href="https://wa.me/620000000000" target="_blank" class="btn btn-success d-flex align-items-center justify-content-center gap-2">
-                            <i class="bi bi-whatsapp"></i>Chat WhatsApp
+                <div class="glass-panel p-4">
+                    <h3 class="h5 fw-bold mb-1">Butuh konsultasi cepat?</h3>
+                    <p class="mb-4" style="font-size:.875rem;color:var(--text-muted)">
+                        Tim sales kami online setiap hari kerja <strong>09.00–20.00 WIB</strong>.
+                    </p>
+                    <div class="vstack gap-2">
+                        <a href="https://wa.me/{{ config('company.whatsapp') }}" target="_blank"
+                           class="btn-accent justify-content-center"
+                           style="padding:.65rem 1rem;font-size:.9rem;border-radius:12px">
+                            <i class="bi bi-whatsapp"></i> Chat WhatsApp Sekarang
                         </a>
-                        <a href="mailto:cs@jayamebel.id" class="btn btn-outline-light d-flex align-items-center justify-content-center gap-2">
-                            <i class="bi bi-envelope"></i>Email Penawaran
+                        <a href="mailto:{{ config('company.email') }}"
+                           class="btn-outline-accent justify-content-center"
+                           style="padding:.6rem 1rem;font-size:.9rem;border-radius:12px">
+                            <i class="bi bi-envelope"></i> Kirim Email Penawaran
+                        </a>
+                        <a href="tel:{{ config('company.phone') }}"
+                           class="btn-outline-accent justify-content-center"
+                           style="padding:.6rem 1rem;font-size:.9rem;border-radius:12px">
+                            <i class="bi bi-telephone"></i> Telepon Langsung
                         </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
 @endsection

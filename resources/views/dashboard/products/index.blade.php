@@ -10,7 +10,7 @@
                 <h2 class="h5 fw-bold mb-0">Daftar Produk</h2>
                 <p class="text-muted mb-0">{{ $products->total() }} produk terdaftar</p>
             </div>
-            <a href="{{ route('cashier.products.create') }}" class="btn btn-primary-custom">
+            <a href="{{ route('dashboard.products.create') }}" class="btn btn-primary-custom">
                 <i class="bi bi-plus-lg"></i> Tambah Produk
             </a>
         </div>
@@ -51,10 +51,10 @@
                             </td>
                             <td class="text-end text-nowrap">
                                 <div class="d-flex align-items-center justify-content-end gap-2">
-                                    <a href="{{ route('cashier.products.edit', $product) }}" class="btn btn-sm btn-outline-primary">
+                                    <a href="{{ route('dashboard.products.edit', $product) }}" class="btn btn-sm btn-outline-primary">
                                         <i class="bi bi-pencil"></i> Edit
                                     </a>
-                                    <form action="{{ route('cashier.products.destroy', $product) }}" method="POST"
+                                    <form action="{{ route('dashboard.products.destroy', $product) }}" method="POST"
                                           onsubmit="return confirm('Hapus produk {{ $product->nama_produk }}?')">
                                         @csrf
                                         @method('DELETE')
@@ -71,7 +71,7 @@
                                 <i class="bi bi-box-seam d-block mb-2" style="font-size:2rem;color:var(--text-muted)"></i>
                                 <span class="text-muted">Belum ada produk.</span>
                                 <div class="mt-3">
-                                    <a href="{{ route('cashier.products.create') }}" class="btn btn-primary">Tambah Produk Pertama</a>
+                                    <a href="{{ route('dashboard.products.create') }}" class="btn btn-primary">Tambah Produk Pertama</a>
                                 </div>
                             </td>
                         </tr>

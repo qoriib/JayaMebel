@@ -90,7 +90,7 @@ class SaleController extends Controller
         });
 
         return redirect()
-            ->route('cashier.sales.index')
+            ->route('dashboard.sales.index')
             ->with('success', 'Transaksi penjualan berhasil dicatat.');
     }
 
@@ -114,7 +114,7 @@ class SaleController extends Controller
         });
 
         return redirect()
-            ->route('cashier.sales.index')
+            ->route('dashboard.sales.index')
             ->with('success', 'Transaksi berhasil dihapus dan stok dipulihkan.');
     }
 }

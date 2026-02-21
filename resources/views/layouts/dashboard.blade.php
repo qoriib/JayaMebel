@@ -38,32 +38,39 @@
                 <nav class="sidebar-nav">
                     @if($user->role === 'admin')
                         <div class="sidebar-section-label">Utama</div>
-                        <a href="{{ route('admin.dashboard') }}" class="sidebar-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                        <a href="{{ route('dashboard.index') }}" class="sidebar-link {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
                             <i class="bi bi-speedometer2"></i> Dashboard
                         </a>
                         <div class="sidebar-section-label">Manajemen</div>
-                        <a href="{{ route('admin.cashiers.index') }}" class="sidebar-link {{ request()->routeIs('admin.cashiers.*') ? 'active' : '' }}">
+                        <a href="{{ route('dashboard.cashiers.index') }}" class="sidebar-link {{ request()->routeIs('dashboard.cashiers.*') ? 'active' : '' }}">
                             <i class="bi bi-people"></i> Data Kasir
                         </a>
                         <div class="sidebar-section-label">Laporan</div>
-                        <a href="{{ route('admin.reports.sales') }}" class="sidebar-link {{ request()->routeIs('admin.reports.sales*') ? 'active' : '' }}">
+                        <a href="{{ route('dashboard.reports.sales') }}" class="sidebar-link {{ request()->routeIs('dashboard.reports.sales*') ? 'active' : '' }}">
                             <i class="bi bi-bar-chart-line"></i> Laporan Penjualan
                         </a>
-                        <a href="{{ route('admin.reports.stock') }}" class="sidebar-link {{ request()->routeIs('admin.reports.stock') ? 'active' : '' }}">
+                        <a href="{{ route('dashboard.reports.stock') }}" class="sidebar-link {{ request()->routeIs('dashboard.reports.stock*') ? 'active' : '' }}">
                             <i class="bi bi-boxes"></i> Laporan Stok
                         </a>
                     @else
                         <div class="sidebar-section-label">Utama</div>
-                        <a href="{{ route('cashier.dashboard') }}" class="sidebar-link {{ request()->routeIs('cashier.dashboard') ? 'active' : '' }}">
+                        <a href="{{ route('dashboard.index') }}" class="sidebar-link {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
                             <i class="bi bi-speedometer2"></i> Dashboard
                         </a>
                         <div class="sidebar-section-label">Transaksi</div>
-                        <a href="{{ route('cashier.sales.index') }}" class="sidebar-link {{ request()->routeIs('cashier.sales.*') ? 'active' : '' }}">
+                        <a href="{{ route('dashboard.sales.index') }}" class="sidebar-link {{ request()->routeIs('dashboard.sales.*') ? 'active' : '' }}">
                             <i class="bi bi-cart3"></i> Penjualan
                         </a>
                         <div class="sidebar-section-label">Inventori</div>
-                        <a href="{{ route('cashier.products.index') }}" class="sidebar-link {{ request()->routeIs('cashier.products.*') ? 'active' : '' }}">
+                        <a href="{{ route('dashboard.products.index') }}" class="sidebar-link {{ request()->routeIs('dashboard.products.*') ? 'active' : '' }}">
                             <i class="bi bi-box-seam"></i> Data Produk
+                        </a>
+                        <div class="sidebar-section-label">Laporan</div>
+                        <a href="{{ route('dashboard.reports.sales') }}" class="sidebar-link {{ request()->routeIs('dashboard.reports.sales*') ? 'active' : '' }}">
+                            <i class="bi bi-bar-chart-line"></i> Laporan Penjualan
+                        </a>
+                        <a href="{{ route('dashboard.reports.stock') }}" class="sidebar-link {{ request()->routeIs('dashboard.reports.stock*') ? 'active' : '' }}">
+                            <i class="bi bi-boxes"></i> Laporan Stok
                         </a>
                     @endif
                 </nav>

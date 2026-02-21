@@ -161,7 +161,7 @@
 
     {{-- Screen action bar --}}
     <div class="screen-bar">
-        <a href="{{ route('admin.reports.sales', array_filter(request()->query())) }}" class="btn-back">
+        <a href="{{ route('dashboard.reports.sales', array_filter(request()->query())) }}" class="btn-back">
             Kembali
         </a>
         <button class="btn-print" onclick="window.print()">

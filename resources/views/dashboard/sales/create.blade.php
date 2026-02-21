@@ -22,7 +22,7 @@
         {{-- Form --}}
         <div class="col-12 col-xl-7">
             <div class="glass-panel p-4">
-                <form id="sale-form" action="{{ route('cashier.sales.store') }}" method="POST">
+                <form id="sale-form" action="{{ route('dashboard.sales.store') }}" method="POST">
                     @csrf
 
                     <div class="mb-4">
@@ -96,7 +96,7 @@
                         <button type="submit" class="btn btn-primary flex-grow-1">
                             <i class="bi bi-check-lg me-1"></i> Simpan Transaksi
                         </button>
-                        <a href="{{ route('cashier.sales.index') }}" class="btn btn-outline-danger">Batal</a>
+                        <a href="{{ route('dashboard.sales.index') }}" class="btn btn-outline-danger">Batal</a>
                     </div>
                 </form>
             </div>

@@ -39,7 +39,7 @@
                 <h2 class="h5 fw-bold mb-0">Riwayat Transaksi</h2>
                 <p class="text-muted mb-0" style="font-size:.8rem">5 transaksi terakhir yang kamu catat</p>
             </div>
-            <a href="{{ route('cashier.sales.create') }}" class="btn-primary-custom text-decoration-none">
+            <a href="{{ route('dashboard.sales.create') }}" class="btn-primary-custom text-decoration-none">
                 <i class="bi bi-plus-lg me-1"></i> Transaksi Baru
             </a>
         </div>
