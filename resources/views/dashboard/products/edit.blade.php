@@ -39,7 +39,7 @@
                         {{-- Preview gambar: saat ini atau setelah dipilih --}}
                         <div id="image-preview-wrapper" class="mb-3 {{ $product->gambar ? '' : 'd-none' }}">
                             <img id="image-preview"
-                                 src="{{ $product->gambar ? Storage::url($product->gambar) : '' }}"
+                                 src="{{ $product->gambar ? $product->gambar_url : '' }}"
                                  alt="{{ $product->nama_produk }}"
                                  style="width:120px;height:120px;object-fit:cover;border-radius:12px;border:1px solid var(--border-color);display:block">
                             <p class="mt-2 mb-0" style="font-size:.78rem;color:var(--text-muted)" id="image-preview-label">

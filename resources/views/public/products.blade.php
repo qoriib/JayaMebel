@@ -126,7 +126,7 @@
                             <a href="{{ route('product.show', $item) }}"
                                style="flex-shrink:0;width:90px;height:90px;border-radius:12px;overflow:hidden;border:1px solid var(--border-color);display:block">
                                 @if ($item->gambar)
-                                    <img src="{{ asset('storage/'.$item->gambar) }}" alt="{{ $item->nama_produk }}"
+                                    <img src="{{ $item->gambar_url }}" alt="{{ $item->nama_produk }}"
                                          style="width:100%;height:100%;object-fit:cover">
                                 @else
                                     <img src="https://placehold.co/90x90/f1ede6/c07a36"
@@ -189,7 +189,7 @@
                     <article class="product-card">
                         <a href="{{ route('product.show', $product) }}">
                             @if ($product->gambar)
-                                <img src="{{ asset('storage/'.$product->gambar) }}"
+                                <img src="{{ $product->gambar_url }}"
                                      alt="{{ $product->nama_produk }}" class="card-img">
                             @else
                                 <img src="https://placehold.co/600x400/f1ede6/c07a36"
@@ -271,7 +271,7 @@
                         <article class="product-card">
                             <a href="{{ route('product.show', $arrival) }}">
                                 @if ($arrival->gambar)
-                                    <img src="{{ asset('storage/'.$arrival->gambar) }}"
+                                    <img src="{{ $arrival->gambar_url }}"
                                          alt="{{ $arrival->nama_produk }}" class="card-img">
                                 @else
                                     <img src="https://placehold.co/400x300/f1ede6/c07a36"

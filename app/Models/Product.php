@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -32,6 +33,18 @@ class Product extends Model
             'harga' => 'decimal:2',
             'stok' => 'integer',
         ];
+    }
+
+    /**
+     * URL publik gambar produk — menghormati disk yang dikonfigurasi (public / r2).
+     */
+    public function getGambarUrlAttribute(): ?string
+    {
+        if (! $this->gambar) {
+            return null;
+        }
+
+        return Storage::disk(config('filesystems.product_disk'))->url($this->gambar);
     }
 
     /**

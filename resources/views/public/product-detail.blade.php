@@ -29,7 +29,7 @@
                      style="border-radius:var(--card-radius);overflow:hidden;border:1px solid var(--border-color);background:var(--surface-alt);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center">
                     @if ($product->gambar)
                         <img id="product-main-img"
-                             src="{{ asset('storage/'.$product->gambar) }}"
+                             src="{{ $product->gambar_url }}"
                              alt="{{ $product->nama_produk }}"
                              style="width:100%;height:100%;object-fit:cover;cursor:zoom-in;transition:transform .3s">
                     @else
@@ -44,7 +44,7 @@
                 @if ($product->gambar)
                     <div id="img-lightbox"
                          style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.82);align-items:center;justify-content:center;cursor:zoom-out">
-                        <img src="{{ asset('storage/'.$product->gambar) }}"
+                        <img src="{{ $product->gambar_url }}"
                              alt="{{ $product->nama_produk }}"
                              style="max-width:90vw;max-height:90vh;border-radius:12px;object-fit:contain">
                     </div>
@@ -180,7 +180,7 @@
                     <div class="col-6 col-lg-3">
                         <article class="product-card">
                             @if ($item->gambar)
-                                <img src="{{ asset('storage/'.$item->gambar) }}"
+                                <img src="{{ $item->gambar_url }}"
                                      alt="{{ $item->nama_produk }}" class="card-img">
                             @else
                                 <img src="https://placehold.co/400x300/f1ede6/c07a36"

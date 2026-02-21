@@ -16,7 +16,9 @@
 
         {{-- ── Navbar ── --}}
         <nav id="site-navbar">
-            <div class="container-xl d-flex align-items-center gap-3">
+            <div class="container-xl d-flex align-items-center gap-2">
+
+                {{-- Logo --}}
                 <a href="{{ route('landing') }}" class="navbar-brand-logo me-auto">
                     <div class="logo-icon"><i class="bi bi-house-heart-fill"></i></div>
                     <div>
@@ -25,22 +27,53 @@
                     </div>
                 </a>
 
-                <div id="nav-menu" class="d-none d-md-flex align-items-center gap-1">
+                {{-- Desktop nav links (md+) --}}
+                <div class="d-none d-md-flex align-items-center gap-1">
                     <a href="{{ route('landing') }}" class="nav-link-custom {{ request()->routeIs('landing') ? 'active' : '' }}">Beranda</a>
                     <a href="{{ route('landing') }}#catalogue" class="nav-link-custom">Katalog</a>
                     <a href="{{ route('landing') }}#custom" class="nav-link-custom">Custom Order</a>
                     <a href="{{ route('landing') }}#kontak" class="nav-link-custom">Kontak</a>
                 </div>
+
+                {{-- Mobile hamburger (< md) --}}
+                <button id="nav-toggler" class="d-md-none"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#mobile-nav"
+                        aria-controls="mobile-nav"
+                        aria-label="Buka menu">
+                    <i class="bi bi-list"></i>
+                </button>
             </div>
         </nav>
 
-        {{-- ── Mobile Menu ── --}}
-        <div id="nav-menu" class="d-md-none" style="background:var(--surface);border-bottom:1px solid var(--border-color)">
-            <div class="container-xl py-2 d-flex flex-column gap-1">
-                <a href="{{ route('landing') }}" class="nav-link-custom">Beranda</a>
-                <a href="{{ route('landing') }}#catalogue" class="nav-link-custom">Katalog</a>
-                <a href="{{ route('landing') }}#custom" class="nav-link-custom">Custom Order</a>
-                <a href="{{ route('landing') }}#kontak" class="nav-link-custom">Kontak</a>
+        {{-- ── Mobile Offcanvas ── --}}
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="mobile-nav" aria-labelledby="mobile-nav-label">
+            <div class="offcanvas-header" style="border-bottom:1px solid var(--border-color);padding:1.1rem 1.25rem">
+                <div class="navbar-brand-logo">
+                    <div class="logo-icon" style="width:34px;height:34px;font-size:1rem"><i class="bi bi-house-heart-fill"></i></div>
+                    <div>
+                        <div class="brand-name" id="mobile-nav-label">Jaya Mebel</div>
+                        <div class="brand-sub">UD Jaya Mebel</div>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Tutup"></button>
+            </div>
+            <div class="offcanvas-body d-flex flex-column p-3 gap-1">
+
+                {{-- Nav links --}}
+                <p class="offcanvas-section-label">Menu</p>
+                <a href="{{ route('landing') }}" class="nav-link-custom {{ request()->routeIs('landing') ? 'active' : '' }}" data-bs-dismiss="offcanvas">
+                    <i class="bi bi-house me-2"></i>Beranda
+                </a>
+                <a href="{{ route('landing') }}#catalogue" class="nav-link-custom" data-bs-dismiss="offcanvas">
+                    <i class="bi bi-grid me-2"></i>Katalog Produk
+                </a>
+                <a href="{{ route('landing') }}#custom" class="nav-link-custom" data-bs-dismiss="offcanvas">
+                    <i class="bi bi-pencil-square me-2"></i>Custom Order
+                </a>
+                <a href="{{ route('landing') }}#kontak" class="nav-link-custom" data-bs-dismiss="offcanvas">
+                    <i class="bi bi-telephone me-2"></i>Kontak
+                </a>
             </div>
         </div>
 

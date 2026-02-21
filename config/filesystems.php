@@ -17,6 +17,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Product Image Storage Disk
+    |--------------------------------------------------------------------------
+    |
+    | The disk used to store and serve product images. Set PRODUCT_STORAGE_DISK
+    | to "r2" in .env to use Cloudflare R2 instead of the local public disk.
+    |
+    */
+
+    'product_disk' => env('PRODUCT_STORAGE_DISK', 'public'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Filesystem Disks
     |--------------------------------------------------------------------------
     |
