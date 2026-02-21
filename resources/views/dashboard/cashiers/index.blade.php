@@ -10,7 +10,7 @@
                 <h2 class="h5 fw-bold mb-0">Daftar Kasir</h2>
                 <p class="text-muted mb-0" style="font-size:.8rem">{{ $cashiers->total() }} akun kasir terdaftar</p>
             </div>
-            <a href="{{ route('admin.cashiers.create') }}" class="btn btn-primary">
+            <a href="{{ route('admin.cashiers.create') }}" class="btn btn-primary-custom">
                 <i class="bi bi-plus-lg"></i> Tambah Kasir
             </a>
         </div>

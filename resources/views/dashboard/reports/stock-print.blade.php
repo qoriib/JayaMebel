@@ -189,10 +189,10 @@
     {{-- Screen action bar --}}
     <div class="screen-bar">
         <a href="{{ route('admin.reports.stock', array_filter(request()->query())) }}" class="btn-back">
-            ← Kembali
+            Kembali
         </a>
         <button class="btn-print" onclick="window.print()">
-            ⎙ Cetak / Simpan PDF
+            Cetak / Simpan PDF
         </button>
     </div>
 

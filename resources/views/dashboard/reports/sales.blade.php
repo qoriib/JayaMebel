@@ -7,86 +7,96 @@
     {{-- Stat Cards --}}
     <div class="row g-3 mb-4">
         <div class="col-12 col-sm-4">
-            <div class="section-card d-flex align-items-center gap-3 py-3">
-                <div style="width:48px;height:48px;border-radius:12px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                    <i class="bi bi-receipt" style="font-size:1.3rem;color:var(--accent)"></i>
+            <div class="metric-card h-100">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <div style="width:38px;height:38px;border-radius:10px;background:rgba(111,66,193,.1);display:flex;align-items:center;justify-content:center">
+                        <i class="bi bi-receipt" style="color:#6f42c1"></i>
+                    </div>
+                    <div class="metric-label mb-0">Total Transaksi</div>
                 </div>
-                <div>
-                    <p class="text-muted mb-0" style="font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600">Total Transaksi</p>
-                    <p class="fw-bold mb-0" style="font-size:1.4rem">{{ number_format($totalTransactions) }}</p>
-                </div>
+                <div class="metric-value">{{ number_format($totalTransactions) }}</div>
+                <p class="text-muted mb-0" style="font-size:.8rem">Semua transaksi tercatat</p>
             </div>
         </div>
         <div class="col-12 col-sm-4">
-            <div class="section-card d-flex align-items-center gap-3 py-3">
-                <div style="width:48px;height:48px;border-radius:12px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                    <i class="bi bi-cash-stack" style="font-size:1.3rem;color:var(--accent)"></i>
+            <div class="metric-card h-100">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <div style="width:38px;height:38px;border-radius:10px;background:rgba(192,122,54,.12);display:flex;align-items:center;justify-content:center">
+                        <i class="bi bi-cash-stack" style="color:var(--accent)"></i>
+                    </div>
+                    <div class="metric-label mb-0">Total Pendapatan</div>
                 </div>
-                <div>
-                    <p class="text-muted mb-0" style="font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600">Total Pendapatan</p>
-                    <p class="fw-bold mb-0 money" style="font-size:1.2rem">Rp {{ number_format($totalRevenue, 0, ',', '.') }}</p>
-                </div>
+                <div class="metric-value money" style="font-size:1.35rem">Rp {{ number_format($totalRevenue, 0, ',', '.') }}</div>
+                <p class="text-muted mb-0" style="font-size:.8rem">Keseluruhan omzet</p>
             </div>
         </div>
         <div class="col-12 col-sm-4">
-            <div class="section-card d-flex align-items-center gap-3 py-3">
-                <div style="width:48px;height:48px;border-radius:12px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                    <i class="bi bi-graph-up" style="font-size:1.3rem;color:var(--accent)"></i>
+            <div class="metric-card h-100">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <div style="width:38px;height:38px;border-radius:10px;background:rgba(25,135,84,.1);display:flex;align-items:center;justify-content:center">
+                        <i class="bi bi-graph-up" style="color:#198754"></i>
+                    </div>
+                    <div class="metric-label mb-0">Rata-rata / Transaksi</div>
                 </div>
-                <div>
-                    <p class="text-muted mb-0" style="font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600">Rata-rata / Transaksi</p>
-                    <p class="fw-bold mb-0 money" style="font-size:1.2rem">Rp {{ number_format($averageOrder, 0, ',', '.') }}</p>
-                </div>
+                <div class="metric-value money" style="font-size:1.35rem">Rp {{ number_format($averageOrder, 0, ',', '.') }}</div>
+                <p class="text-muted mb-0" style="font-size:.8rem">Per transaksi</p>
             </div>
         </div>
     </div>
 
     {{-- Filter --}}
-    <div class="section-card mb-4">
-        <p class="fw-semibold mb-3" style="font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted)">
-            <i class="bi bi-funnel me-1"></i> Filter Laporan
-        </p>
-        <form method="GET" class="row g-3 align-items-end">
-            <div class="col-12 col-sm-6 col-lg-3">
-                <label for="from" class="form-label fw-semibold" style="font-size:.85rem">Dari Tanggal</label>
-                <input type="date" id="from" name="from" value="{{ $filters['from'] ?? '' }}" class="form-control">
+    <div class="glass-panel p-4 mb-4">
+        <div class="d-flex align-items-center mb-3">
+            <div>
+                <h2 class="h5 fw-bold mb-0">Filter Laporan</h2>
+                <p class="text-muted mb-0" style="font-size:.8rem">Saring data berdasarkan periode atau kasir</p>
             </div>
-            <div class="col-12 col-sm-6 col-lg-3">
-                <label for="to" class="form-label fw-semibold" style="font-size:.85rem">Sampai Tanggal</label>
-                <input type="date" id="to" name="to" value="{{ $filters['to'] ?? '' }}" class="form-control">
-            </div>
-            <div class="col-12 col-sm-6 col-lg-3">
-                <label for="cashier_id" class="form-label fw-semibold" style="font-size:.85rem">Kasir</label>
-                <select id="cashier_id" name="cashier_id" class="form-select">
-                    <option value="">Semua Kasir</option>
-                    @foreach ($cashiers as $cashier)
-                        <option value="{{ $cashier->id }}" @selected(($filters['cashier_id'] ?? '') == $cashier->id)>
-                            {{ $cashier->nama }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="d-flex gap-2">
-                    <button type="submit" class="btn-accent flex-grow-1 d-flex align-items-center justify-content-center gap-1">
-                        <i class="bi bi-search"></i> Terapkan
-                    </button>
-                    <a href="{{ route('admin.reports.sales') }}" class="btn-outline-custom text-decoration-none d-flex align-items-center" title="Reset">
-                        <i class="bi bi-arrow-counterclockwise"></i>
-                    </a>
-                    <a href="{{ route('admin.reports.sales.print', array_filter(request()->query())) }}"
-                       target="_blank"
-                       class="btn btn-sm d-flex align-items-center gap-1 text-decoration-none"
-                       style="background:#1a1a2e;color:#fff;border-radius:10px;padding:.45rem .75rem;font-size:.85rem;white-space:nowrap">
-                        <i class="bi bi-printer"></i> Cetak PDF
-                    </a>
+        </div>
+        <form method="GET">
+            <div class="row g-3 mb-3">
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <label for="from" class="form-label fw-semibold" style="font-size:.85rem">Dari Tanggal</label>
+                    <input type="date" id="from" name="from" value="{{ $filters['from'] ?? '' }}" class="form-control">
                 </div>
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <label for="to" class="form-label fw-semibold" style="font-size:.85rem">Sampai Tanggal</label>
+                    <input type="date" id="to" name="to" value="{{ $filters['to'] ?? '' }}" class="form-control">
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <label for="cashier_id" class="form-label fw-semibold" style="font-size:.85rem">Kasir</label>
+                    <select id="cashier_id" name="cashier_id" class="form-select">
+                        <option value="">Semua Kasir</option>
+                        @foreach ($cashiers as $cashier)
+                            <option value="{{ $cashier->id }}" @selected(($filters['cashier_id'] ?? '') == $cashier->id)>
+                                {{ $cashier->nama }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="d-flex flex-wrap gap-2">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-search me-1"></i> Terapkan Filter
+                </button>
+                <a href="{{ route('admin.reports.sales') }}" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-counterclockwise me-1"></i> Reset
+                </a>
+                <a href="{{ route('admin.reports.sales.print', array_filter(request()->query())) }}"
+                   target="_blank" class="btn btn-dark ms-auto">
+                    <i class="bi bi-printer me-1"></i> Cetak PDF
+                </a>
             </div>
         </form>
     </div>
 
     {{-- Table --}}
-    <div class="section-card">
+    <div class="glass-panel p-4">
+        <div class="d-flex align-items-center mb-4">
+            <div class="flex-grow-1">
+                <h2 class="h5 fw-bold mb-0">Data Penjualan</h2>
+                <p class="text-muted mb-0" style="font-size:.8rem">{{ $sales->total() }} transaksi ditemukan</p>
+            </div>
+        </div>
         <div class="table-responsive">
             <table class="table table-custom table-hover align-middle mb-0">
                 <thead>
@@ -108,14 +118,7 @@
                                 <div style="font-size:.88rem">{{ $sale->tanggal_penjualan->format('d M Y') }}</div>
                                 <small class="text-muted">{{ $sale->tanggal_penjualan->format('H:i') }}</small>
                             </td>
-                            <td>
-                                <div class="d-flex align-items-center gap-2">
-                                    <div style="width:32px;height:32px;border-radius:50%;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:.75rem;flex-shrink:0">
-                                        {{ strtoupper(substr($sale->cashier?->nama ?? '?', 0, 1)) }}
-                                    </div>
-                                    <span style="font-size:.875rem">{{ $sale->cashier?->nama ?? 'Tidak diketahui' }}</span>
-                                </div>
-                            </td>
+                            <td>{{ $sale->cashier?->nama ?? 'Tidak diketahui' }}</td>
                             <td class="text-center" style="font-size:.875rem">{{ $sale->details->count() }} produk</td>
                             <td class="text-center" style="font-size:.875rem">{{ $sale->details->sum('jumlah') }} unit</td>
                             <td class="text-end money">Rp {{ number_format($sale->total_harga, 0, ',', '.') }}</td>

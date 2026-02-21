@@ -23,7 +23,7 @@
             <aside id="app-sidebar">
                 {{-- Logo --}}
                 <div class="sidebar-logo">
-                    <a href="{{ url('/') }}" class="d-flex align-items-center gap-2 text-decoration-none">
+                    <div class="d-flex align-items-center gap-2 text-decoration-none">
                         <div class="logo-icon">
                             <i class="bi bi-house-heart-fill"></i>
                         </div>
@@ -31,7 +31,7 @@
                             <div class="brand-name">Jaya Mebel</div>
                             <div class="brand-sub">UD Jaya Mebel</div>
                         </div>
-                    </a>
+                    </div>
                 </div>
 
                 {{-- Navigation --}}

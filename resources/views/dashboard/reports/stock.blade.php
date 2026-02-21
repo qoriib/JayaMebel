@@ -6,102 +6,113 @@
 @section('content')
     {{-- Stat Cards --}}
     <div class="row g-3 mb-4">
-        <div class="col-6 col-sm-3">
-            <div class="section-card d-flex align-items-center gap-3 py-3">
-                <div style="width:48px;height:48px;border-radius:12px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                    <i class="bi bi-box-seam" style="font-size:1.3rem;color:var(--accent)"></i>
+        <div class="col-6 col-xl-3">
+            <div class="metric-card h-100">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <div style="width:38px;height:38px;border-radius:10px;background:rgba(192,122,54,.12);display:flex;align-items:center;justify-content:center">
+                        <i class="bi bi-box-seam-fill" style="color:var(--accent)"></i>
+                    </div>
+                    <div class="metric-label mb-0">Total Produk</div>
                 </div>
-                <div>
-                    <p class="text-muted mb-0" style="font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600">Total Produk</p>
-                    <p class="fw-bold mb-0" style="font-size:1.4rem">{{ number_format($totalProducts) }}</p>
-                </div>
+                <div class="metric-value">{{ number_format($totalProducts) }}</div>
+                <p class="text-muted mb-0" style="font-size:.8rem">Total katalog</p>
             </div>
         </div>
-        <div class="col-6 col-sm-3">
-            <div class="section-card d-flex align-items-center gap-3 py-3">
-                <div style="width:48px;height:48px;border-radius:12px;background:#d1fae5;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                    <i class="bi bi-check-circle" style="font-size:1.3rem;color:#059669"></i>
+        <div class="col-6 col-xl-3">
+            <div class="metric-card h-100">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <div style="width:38px;height:38px;border-radius:10px;background:rgba(25,135,84,.1);display:flex;align-items:center;justify-content:center">
+                        <i class="bi bi-check-circle-fill" style="color:#198754"></i>
+                    </div>
+                    <div class="metric-label mb-0">Tersedia</div>
                 </div>
-                <div>
-                    <p class="text-muted mb-0" style="font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600">Tersedia</p>
-                    <p class="fw-bold mb-0" style="font-size:1.4rem;color:#059669">{{ number_format($availableProducts) }}</p>
-                </div>
+                <div class="metric-value" style="color:#198754">{{ number_format($availableProducts) }}</div>
+                <p class="text-muted mb-0" style="font-size:.8rem">Siap dijual</p>
             </div>
         </div>
-        <div class="col-6 col-sm-3">
-            <div class="section-card d-flex align-items-center gap-3 py-3">
-                <div style="width:48px;height:48px;border-radius:12px;background:#fee2e2;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                    <i class="bi bi-x-circle" style="font-size:1.3rem;color:#dc2626"></i>
+        <div class="col-6 col-xl-3">
+            <div class="metric-card h-100">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <div style="width:38px;height:38px;border-radius:10px;background:rgba(220,53,69,.1);display:flex;align-items:center;justify-content:center">
+                        <i class="bi bi-x-circle-fill" style="color:#dc3545"></i>
+                    </div>
+                    <div class="metric-label mb-0">Tidak Tersedia</div>
                 </div>
-                <div>
-                    <p class="text-muted mb-0" style="font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600">Tidak Tersedia</p>
-                    <p class="fw-bold mb-0" style="font-size:1.4rem;color:#dc2626">{{ number_format($outOfStockProducts) }}</p>
-                </div>
+                <div class="metric-value" style="color:#dc3545">{{ number_format($outOfStockProducts) }}</div>
+                <p class="text-muted mb-0" style="font-size:.8rem">Stok habis</p>
             </div>
         </div>
-        <div class="col-6 col-sm-3">
-            <div class="section-card d-flex align-items-center gap-3 py-3">
-                <div style="width:48px;height:48px;border-radius:12px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                    <i class="bi bi-stack" style="font-size:1.3rem;color:var(--accent)"></i>
+        <div class="col-6 col-xl-3">
+            <div class="metric-card h-100">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <div style="width:38px;height:38px;border-radius:10px;background:rgba(13,110,253,.1);display:flex;align-items:center;justify-content:center">
+                        <i class="bi bi-stack" style="color:#0d6efd"></i>
+                    </div>
+                    <div class="metric-label mb-0">Total Unit Stok</div>
                 </div>
-                <div>
-                    <p class="text-muted mb-0" style="font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600">Total Unit Stok</p>
-                    <p class="fw-bold mb-0" style="font-size:1.4rem">{{ number_format($totalStock) }}</p>
-                </div>
+                <div class="metric-value">{{ number_format($totalStock) }}</div>
+                <p class="text-muted mb-0" style="font-size:.8rem">Unit tersimpan</p>
             </div>
         </div>
     </div>
 
     {{-- Filter --}}
-    <div class="section-card mb-4">
-        <p class="fw-semibold mb-3" style="font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted)">
-            <i class="bi bi-funnel me-1"></i> Filter Laporan
-        </p>
-        <form method="GET" class="row g-3 align-items-end">
-            <div class="col-12 col-sm-6 col-lg-4">
-                <label for="search" class="form-label fw-semibold" style="font-size:.85rem">Cari Nama Produk</label>
-                <input type="text" id="search" name="search" value="{{ $filters['search'] ?? '' }}"
-                       placeholder="Cari produk..." class="form-control">
+    <div class="glass-panel p-4 mb-4">
+        <div class="d-flex align-items-center mb-3">
+            <div>
+                <h2 class="h5 fw-bold mb-0">Filter Laporan</h2>
+                <p class="text-muted mb-0" style="font-size:.8rem">Saring data berdasarkan nama, status, atau jumlah stok</p>
             </div>
-            <div class="col-12 col-sm-6 col-lg-2">
-                <label for="stok_status" class="form-label fw-semibold" style="font-size:.85rem">Status Stok</label>
-                <select id="stok_status" name="stok_status" class="form-select">
-                    <option value="">Semua Status</option>
-                    <option value="tersedia" @selected(($filters['stok_status'] ?? '') === 'tersedia')>Tersedia</option>
-                    <option value="tidak" @selected(($filters['stok_status'] ?? '') === 'tidak')>Tidak Tersedia</option>
-                </select>
-            </div>
-            <div class="col-6 col-sm-3 col-lg-2">
-                <label for="stok_min" class="form-label fw-semibold" style="font-size:.85rem">Stok Min</label>
-                <input type="number" id="stok_min" name="stok_min" value="{{ $filters['stok_min'] ?? '' }}"
-                       min="0" placeholder="0" class="form-control">
-            </div>
-            <div class="col-6 col-sm-3 col-lg-2">
-                <label for="stok_max" class="form-label fw-semibold" style="font-size:.85rem">Stok Maks</label>
-                <input type="number" id="stok_max" name="stok_max" value="{{ $filters['stok_max'] ?? '' }}"
-                       min="0" placeholder="∞" class="form-control">
-            </div>
-            <div class="col-12 col-sm-6 col-lg-2">
-                <div class="d-flex gap-2">
-                    <button type="submit" class="btn-accent flex-grow-1 d-flex align-items-center justify-content-center gap-1">
-                        <i class="bi bi-search"></i> Terapkan
-                    </button>
-                    <a href="{{ route('admin.reports.stock') }}" class="btn-outline-custom text-decoration-none d-flex align-items-center" title="Reset">
-                        <i class="bi bi-arrow-counterclockwise"></i>
-                    </a>
-                    <a href="{{ route('admin.reports.stock.print', array_filter(request()->query())) }}"
-                       target="_blank"
-                       class="btn btn-sm d-flex align-items-center gap-1 text-decoration-none"
-                       style="background:#1a1a2e;color:#fff;border-radius:10px;padding:.45rem .75rem;font-size:.85rem;white-space:nowrap">
-                        <i class="bi bi-printer"></i> Cetak PDF
-                    </a>
+        </div>
+        <form method="GET">
+            <div class="row g-3 mb-3">
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <label for="search" class="form-label fw-semibold" style="font-size:.85rem">Cari Nama Produk</label>
+                    <input type="text" id="search" name="search" value="{{ $filters['search'] ?? '' }}"
+                           placeholder="Cari produk..." class="form-control">
                 </div>
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <label for="stok_status" class="form-label fw-semibold" style="font-size:.85rem">Status Stok</label>
+                    <select id="stok_status" name="stok_status" class="form-select">
+                        <option value="">Semua Status</option>
+                        <option value="tersedia" @selected(($filters['stok_status'] ?? '') === 'tersedia')>Tersedia</option>
+                        <option value="tidak" @selected(($filters['stok_status'] ?? '') === 'tidak')>Tidak Tersedia</option>
+                    </select>
+                </div>
+                <div class="col-6 col-sm-3 col-lg-2">
+                    <label for="stok_min" class="form-label fw-semibold" style="font-size:.85rem">Stok Min</label>
+                    <input type="number" id="stok_min" name="stok_min" value="{{ $filters['stok_min'] ?? '' }}"
+                           min="0" placeholder="0" class="form-control">
+                </div>
+                <div class="col-6 col-sm-3 col-lg-2">
+                    <label for="stok_max" class="form-label fw-semibold" style="font-size:.85rem">Stok Maks</label>
+                    <input type="number" id="stok_max" name="stok_max" value="{{ $filters['stok_max'] ?? '' }}"
+                           min="0" placeholder="∞" class="form-control">
+                </div>
+            </div>
+            <div class="d-flex flex-wrap gap-2">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-search me-1"></i> Terapkan Filter
+                </button>
+                <a href="{{ route('admin.reports.stock') }}" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-counterclockwise me-1"></i> Reset
+                </a>
+                <a href="{{ route('admin.reports.stock.print', array_filter(request()->query())) }}"
+                   target="_blank" class="btn btn-dark ms-auto">
+                    <i class="bi bi-printer me-1"></i> Cetak PDF
+                </a>
             </div>
         </form>
     </div>
 
     {{-- Table --}}
-    <div class="section-card">
+    <div class="glass-panel p-4">
+        <div class="d-flex align-items-center mb-4">
+            <div class="flex-grow-1">
+                <h2 class="h5 fw-bold mb-0">Data Stok Produk</h2>
+                <p class="text-muted mb-0" style="font-size:.8rem">{{ $products->total() }} produk ditemukan</p>
+            </div>
+        </div>
         <div class="table-responsive">
             <table class="table table-custom table-hover align-middle mb-0">
                 <thead>
@@ -119,39 +130,25 @@
                             <td class="text-muted" style="font-size:.8rem">{{ $products->firstItem() + $index }}</td>
                             <td>
                                 <div class="d-flex align-items-center gap-3">
-                                    @if ($product->gambar)
-                                        <img src="{{ asset('storage/'.$product->gambar) }}"
-                                             alt="{{ $product->nama_produk }}"
-                                             style="width:40px;height:40px;border-radius:8px;object-fit:cover;flex-shrink:0">
-                                    @else
-                                        <div style="width:40px;height:40px;border-radius:8px;background:var(--surface-alt);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                                            <i class="bi bi-image text-muted"></i>
-                                        </div>
-                                    @endif
                                     <div>
-                                        <div style="font-size:.875rem;font-weight:600">{{ $product->nama_produk }}</div>
+                                        <div class="fw-semibold" style="font-size:.9rem">{{ $product->nama_produk }}</div>
                                         @if ($product->deskripsi)
-                                            <small class="text-muted" style="font-size:.78rem">{{ Str::limit($product->deskripsi, 60) }}</small>
+                                            <small class="text-muted">{{ Str::limit($product->deskripsi, 60) }}</small>
                                         @endif
                                     </div>
                                 </div>
                             </td>
                             <td class="text-end money" style="font-size:.875rem">Rp {{ number_format($product->harga, 0, ',', '.') }}</td>
                             <td class="text-center">
-                                <span style="font-size:.875rem;font-weight:600;
-                                    color: {{ $product->stok === 0 ? '#dc2626' : ($product->stok <= 5 ? '#d97706' : 'inherit') }}">
+                                <span class="fw-semibold" style="font-size:.875rem;color:{{ $product->stok === 0 ? '#dc3545' : ($product->stok <= 5 ? '#d97706' : 'inherit') }}">
                                     {{ number_format($product->stok) }} unit
                                 </span>
                             </td>
                             <td class="text-center">
                                 @if ($product->stok_status === 'tersedia')
-                                    <span class="badge" style="background:#d1fae5;color:#065f46;border-radius:6px;padding:.3rem .65rem;font-size:.78rem;font-weight:600">
-                                        <i class="bi bi-check-circle me-1"></i> Tersedia
-                                    </span>
+                                    <span class="badge-success">Tersedia</span>
                                 @else
-                                    <span class="badge" style="background:#fee2e2;color:#991b1b;border-radius:6px;padding:.3rem .65rem;font-size:.78rem;font-weight:600">
-                                        <i class="bi bi-x-circle me-1"></i> Tidak Tersedia
-                                    </span>
+                                    <span class="badge-danger">Tidak Tersedia</span>
                                 @endif
                             </td>
                         </tr>
