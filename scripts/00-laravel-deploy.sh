@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
-set -e
+echo "Running composer"
+composer install --no-dev --working-dir=/var/www/html
 
 echo "Caching config..."
-php /var/www/html/artisan config:cache
+php artisan config:cache
 
 echo "Caching routes..."
-php /var/www/html/artisan route:cache
-
-echo "Starting services..."
-exec /usr/bin/supervisord -c /etc/supervisor/conf.d/laravel.conf
+php artisan route:cache
