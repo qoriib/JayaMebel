@@ -1,20 +1,34 @@
-FROM richarvey/nginx-php-fpm:3.1.6
+FROM php:8.2-cli-alpine
+
+WORKDIR /var/www/html
+
+RUN apk add --no-cache \
+    libzip-dev \
+    postgresql-dev \
+    unzip \
+    && docker-php-ext-install pdo pdo_pgsql zip
+
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+COPY composer.json composer.lock ./
+RUN composer install \
+    --no-dev \
+    --no-interaction \
+    --no-plugins \
+    --no-scripts \
+    --prefer-dist \
+    --optimize-autoloader
 
 COPY . .
 
-# Image config
-ENV SKIP_COMPOSER 1
-ENV WEBROOT /var/www/html/public
-ENV PHP_ERRORS_STDERR 1
-ENV RUN_SCRIPTS 1
-ENV REAL_IP_HEADER 1
+RUN mkdir -p storage/framework/{cache,sessions,views} storage/logs bootstrap/cache \
+    && chown -R www-data:www-data storage bootstrap/cache
 
-# Laravel config
-ENV APP_ENV production
-ENV APP_DEBUG false
-ENV LOG_CHANNEL stderr
+ENV APP_ENV=production
+ENV APP_DEBUG=false
 
-# Allow composer to run as root
-ENV COMPOSER_ALLOW_SUPERUSER 1
+EXPOSE 10000
 
-CMD ["/start.sh"]
+USER www-data
+
+CMD ["sh", "-c", "php artisan serve --host=0.0.0.0 --port=${PORT:-10000}"]
