@@ -134,7 +134,7 @@
                     <div class="col-12 col-md-3" id="kontak">
                         <p class="footer-heading">Kontak</p>
                         <p style="font-size:.875rem;color:var(--text-muted);margin-bottom:.5rem">
-                            <i class="bi bi-geo-alt me-2" style="color:var(--accent)"></i>Jl. Raya Mebel No.1, Jepara
+                            <i class="bi bi-geo-alt me-2" style="color:var(--accent)"></i>Pulutan, Kab Grobogan
                         </p>
                         <p style="font-size:.875rem;color:var(--text-muted);margin-bottom:.5rem">
                             <i class="bi bi-telephone me-2" style="color:var(--accent)"></i>{{ config('company.phone_display') }}
